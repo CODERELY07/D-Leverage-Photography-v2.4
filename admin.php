@@ -8,49 +8,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>D'Leverage Admin</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-    <style>
-        .modal{
-            display: none;
-            height: max-content;
-        }
-        .modal.active{
-            display:block;
-        }
-    </style>
+    <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
-    <br><br><br>
-    <div class="modal">
-        <input type="text" name="addCat" id="addCat">
-        <button id="addCatBtn" onclick="addNewCategory()">Add</button>
-    </div>
-    <form action="upload.php" method="POST" enctype="multipart/form-data" id="uploadForm">
-        <label for="category">Select Category:</label>
-        <select name="category" id="category">
-            <!-- <option value="wedding">Wedding</option>
-            <option value="birthday">Birthday</option> -->
-            <?php
-                $query = "SELECT DISTINCT category FROM image";
-                $result = $db->query($query);
+    <main>
+        <div class="modal">
+            <input type="text" class="form-control" name="addCat" id="addCat">
+            <button id="addCatBtn" class="btn btn-primary" onclick="addNewCategory()">Add</button>
+        </div>
+        <form action="upload.php" method="POST" enctype="multipart/form-data" id="uploadForm">
+            <label for="category">Select Category:</label>
+            <select name="category" id="category" class="form-control">
+                <option value="" selected></option>
+                <!-- <option value="wedding">Wedding</option>
+                <option value="birthday">Birthday</option> -->
+                <?php
+                    $query = "SELECT DISTINCT category FROM image";
+                    $result = $db->query($query);
 
-                if($result->num_rows > 0){
-                    while($row = $result->fetch_assoc()){
-                        $category = htmlspecialchars($row['category']); // Sanitize output
-                        echo "<option value='$category'>$category</option>";
+                    if($result->num_rows > 0){
+                        while($row = $result->fetch_assoc()){
+                            $category = htmlspecialchars($row['category']); // Sanitize output
+                            echo "<option value='$category'>$category</option>";
+                        }
                     }
-                }
-              
-            ?>
-            <option value="add">+</option>
-        </select>
-        <br><br>
-        <input type="file" name="uploadImg[]" multiple>
-        <input type="submit" value="Upload Files" name="upload">
-    </form>
+                
+                ?>
+                <option value="add">+</option>
+            </select>
+            <br><br>
+            <input type="file" name="uploadImg[]" class="form-control" multiple>
+            <input type="submit" id="uploadBtn" value="Upload Files" class="btn btn-primary mt-3" name="upload">
+        </form>
+    </main>
 
     <script>
         const add = document.getElementById('category');
         let modal = document.querySelector('.modal');
+        const uploadBtn = document.getElementById('uploadBtn');
+
+        uploadBtn.addEventListener("click",validateUpload);
         add.addEventListener("change", function (e){
             if(e.target.value == "add"){
                 modal.classList.add('active');
@@ -91,7 +88,14 @@
             document.querySelector('.modal').classList.remove('active');
         }
 
-
+        function validateUpload(e){
+            if(add.value == "add" || add.value == ""){
+                e.preventDefault();
+                alert("Please Select Category!");
+            }else{
+                return ;
+            }
+        }
     </script>
 </body>
 </html>

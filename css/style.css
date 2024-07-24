@@ -341,7 +341,40 @@ footer button{
     cursor: pointer;
     margin-bottom: 15px;
 }
-
+/* .image-container::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0);
+    animation: pulse 2.5s infinite;
+  } */
+@keyframes pulse {
+  0% {
+    background-color: rgba(255, 255, 255, 0); /* Transparent */
+    }
+    50% {
+    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+    }
+    100% {
+    background-color: rgba(255, 255, 255, 0); /* Back to transparent */
+  }
+}
+.image-container{
+max-width: 100% !important;
+position: relative;
+background-size: cover !important;
+background-position: center !important;
+max-height: 100% !important;
+}
+.layout > img {
+  opacity: 1;
+}
+.image-container  > img{
+  width: 300px !important;
+  height: 300px !important;
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
 /* Loading Css Images */
 .img::before{
     content: "";
