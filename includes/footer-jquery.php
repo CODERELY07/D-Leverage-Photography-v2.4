@@ -1,14 +1,8 @@
 <footer>
       <div class="footer-wrapper">
         <div class="socials">
-          <a href="#">
-            <i class="fa-brands fa-x-twitter"></i>
-          </a>
           <a href="https://www.instagram.com/dleveragephoto" target="_blank">
             <i class="fa-brands fa-instagram"></i>
-          </a>
-          <a href="#">
-            <i class="fa-brands fa-youtube"></i>
           </a>
           <a href="https://www.facebook.com/dleveragephoto" target="_blank">
             <i class="fa-brands fa-facebook"></i>
@@ -28,7 +22,9 @@
         </div>
         <div class="footer-contact">
             <p>For more Inquiry <br>Please contact us</p>
-            <button type="button">Contact</button>
+            <a href="contact.php">
+              <button type="button">Contact</button>
+            </a>
         </div>
       </div>
       <p class="text-center text-white m-0 p-3">@2024 | ALL RIGHTS RESERVED | D’LEVERAGE</p>

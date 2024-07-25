@@ -15,10 +15,10 @@
     <main>
         <h2>Welcome, Admin</h2>
         <p>What is our business today?</p>
-        <div class="modal">
+        <!-- <div class="modal">
             <input type="text" class="form-control" name="addCat" id="addCat">
             <button id="addCatBtn" class="btn btn-primary" onclick="addNewCategory()">Add</button>
-        </div>
+        </div> -->
         <div class="setting">
             <i class="fa-solid fa-gear" id='logout'></i>
             <div class="logoutBtn">
@@ -29,7 +29,7 @@
             <label for="category">Select Category:</label>
             <select name="category" id="category" class="form-control">
                 <option value="" selected></option>
-                <?php
+                <!-- <//?php
                     $query = "SELECT DISTINCT category FROM image";
                     $result = $db->query($query);
 
@@ -40,8 +40,11 @@
                         }
                     }
                 
-                ?>
-                <option value="add">+</option>
+                ?> -->
+                <option value="" selected></option>
+                <option value="wedding">Wedding/Prenuptial </option>
+                <option value="birthday">Birthday</option>
+                <option value="others">Others</option>
             </select>
             <br><br>
             <input type="file" name="uploadImg[]" class="form-control" multiple>
@@ -63,37 +66,37 @@
             }
         });
 
-        function addNewCategory() {
-            let addCatInput = document.getElementById('addCat');
-            let addCatValue = addCatInput.value.trim().toLowerCase(); // Trim whitespace and convert to lowercase
+        // function addNewCategory() {
+        //     let addCatInput = document.getElementById('addCat');
+        //     let addCatValue = addCatInput.value.trim().toLowerCase(); // Trim whitespace and convert to lowercase
             
-            if (addCatValue === '') {
-                alert('Please enter a category name.');
-                return;
-            }
+        //     if (addCatValue === '') {
+        //         alert('Please enter a category name.');
+        //         return;
+        //     }
             
-            // Check if category already exists
-            let categorySelect = document.getElementById('category');
-            for (let option of categorySelect.options) {
-                if (option.value === addCatValue) {
-                    alert('Category already exists.');
-                    return;
-                }
-            }
+        //     // Check if category already exists
+        //     let categorySelect = document.getElementById('category');
+        //     for (let option of categorySelect.options) {
+        //         if (option.value === addCatValue) {
+        //             alert('Category already exists.');
+        //             return;
+        //         }
+        //     }
             
-            // Create a new option element
-            let option = document.createElement('option');
-            option.value = addCatValue;
-            option.textContent = addCatValue.charAt(0).toUpperCase() + addCatValue.slice(1); // Capitalize first letter
+        //     // Create a new option element
+        //     let option = document.createElement('option');
+        //     option.value = addCatValue;
+        //     option.textContent = addCatValue.charAt(0).toUpperCase() + addCatValue.slice(1); // Capitalize first letter
             
-            // Find the position to insert before the "+"
-            let addOption = document.querySelector('#category option[value="add"]');
-            categorySelect.insertBefore(option, addOption);
+        //     // Find the position to insert before the "+"
+        //     let addOption = document.querySelector('#category option[value="add"]');
+        //     categorySelect.insertBefore(option, addOption);
             
-            // Clear the input field and hide the modal
-            addCatInput.value = '';
-            document.querySelector('.modal').classList.remove('active');
-        }
+        //     // Clear the input field and hide the modal
+        //     addCatInput.value = '';
+        //     document.querySelector('.modal').classList.remove('active');
+        // }
 
         function validateUpload(e){
             if(add.value == "add" || add.value == ""){

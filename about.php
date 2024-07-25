@@ -30,28 +30,43 @@
     data-aos-offset="300"
     data-aos-easing="ease-in-sine"
     >
-    <div class="flex-50 about-50">
-        <div class="text-holder">
-        <h5>Heading</h5>
-        <p>Subheading</p>
-        <p>
-            Body text for your whole article or post. We’ll put in some lorem
-            ipsum to show how a filled-out page might look:
-        </p>
-        <p>
-            Excepteur efficient emerging, minim veniam anim aute carefully
-            curated Ginza conversation exquisite perfect nostrud nisi
-            intricate Content. Qui international first-class nulla ut.
-            Punctual adipisicing, essential lovely queen tempor eiusmod irure.
-            Exclusive izakaya charming Scandinavian impeccable aute quality of
-            life soft power pariatur Melbourne occaecat discerning. Qui
-            wardrobe aliquip, et Porter destination Toto remarkable officia
-            Helsinki excepteur Basset hound. Zürich sleepy perfect
-            consectetur.
-        </p>
+    <h6 class="text-center mb-4">RATES</h6>
+    <div class="rate-parent">
+        <div class="card p-4 ">
+            <div class="amount">
+                <h5 class="mb-3">Basic</h5>
+                <p class="rate">$260</p>
+                <ul>
+                    <li>Portrait/Business Photo</li>
+                    <li>Half-Day Coverage: Up to 4 hours</li>
+                    <li>1 Photographer</li>
+                    <li>Digital Delivery</li>
+                </ul>
+            </div>
         </div>
-        <div class="img-holder img">
-        <img src="image/wedding3.JPG" alt="Model1" />
+        <div class="card p-4">
+            <div class="amount">
+                <h5 class="mb-3">ESSENTIAL</h5>
+                <p class="rate">$300</p>
+                <ul>
+                    <li>Birthday Parties</li>
+                    <li>Four to Six Hours of Coverage</li>
+                    <li>1 Photographer</li>
+                    <li>Digital Delivery</li>
+                </ul>
+            </div>
+        </div>
+        <div class="card p-4">
+            <div class="amount">
+                <h5 class="mb-3">ELITE</h5>
+                <p class="rate">$1,800</p>
+                <ul>
+                    <li>Full wedding coverage</li>
+                    <li>Engagement Photo Session: 4 HOURS</li>
+                    <li>32 GB Flashdrive</li>
+                    <li>Photo slideshow</li>
+                </ul>
+            </div>
         </div>
     </div>
     </main>

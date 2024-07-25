@@ -22,7 +22,7 @@
     referrerpolicy="no-referrer"
   />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>"/>
   </head>
   <body class="grey">
     <div class="mobile-header fix">
@@ -42,9 +42,10 @@
           <a href="#" >Photos</a>
           <div class="mobile-photos-type">
             <ul>
-              <li><a href="#">Birthday Photos</a></li>
-              <li><a href="#">Wedding Photos</a></li>
-              <li><a href="#">Business Photos</a></li>
+              <li><a href="#">Wedding/Prenuptial Photos</a></li>
+              <li><a href="#">Birthday Photos
+</a></li>
+              <li><a href="#">Others</a></li>
               <li><a href="photos.php">All Photos</a></li>
               <li></li>
             </ul>
@@ -69,9 +70,10 @@
             <a href="photos.php">Photos</a>
             <div class="photos-type">
               <ul>
-                <li><a href="#">Birthday Photos</a></li>
-                <li><a href="#">Wedding Photos</a></li>
-                <li><a href="#">Business Photos</a></li>
+                <li><a href="#">Wedding/Prenuptial Photos</a></li>
+                <li><a href="#">Birthday Photos
+</a></li>
+                <li><a href="#">Others</a></li>
               </ul>
             </div>
           </li>

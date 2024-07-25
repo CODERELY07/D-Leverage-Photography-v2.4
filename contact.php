@@ -28,6 +28,24 @@
                 <input type="text" id="location" class="form-control">
             </div>
             <div class="form-group">
+                <label for="session">What type of Session are you looking for? *</label>
+                <select name="session" id="session" class="form-control">
+                    <option value="" selected></option>
+                    <option value="wedding">Wedding/Prenuptial </option>
+                    <option value="birthday">Birthday </option>
+                    <option value="others">Others</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="services">Services *</label>
+                <select name="services" id="services" class="form-control">
+                    <option value="" selected></option>
+                    <option value="basic">Basic</option>
+                    <option value="essential">Essential</option>
+                    <option value="elite">Elite</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="message">Message *</label>
                 <textarea name="message" id="message" cols="10" rows="5" class="form-control"></textarea>
             </div>
