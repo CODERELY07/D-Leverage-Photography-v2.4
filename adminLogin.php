@@ -1,85 +1,86 @@
 <?php
-
-    require_once 'connection.php';
+    require_once 'connection.php'; 
     session_start();
 
-    //redirect the user in the admin.php if it's currently login
-    if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
-        header('locaton:admin.php');
+    // Redirect if already logged in
+    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+        header('Location: admin.php');
         exit();
     }
-    
-    // initialize variable
+
+    // Initialize variables
     $username = $password = "";
     $username_err = $password_err = $login_err = "";
-    
-    //check if the method is post
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
-    
-        // Check if username is empty
-        if(empty(trim($_POST["username"]))){
+
+    // Check if the request method is POST
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+        // Validate username
+        if (empty(trim($_POST["username"]))) {
             $username_err = "Please enter username.";
-        } else{
+        } else {
             $username = trim($_POST["username"]);
         }
-        
-        // Check if password is empty
-        if(empty(trim($_POST["password"]))){
+
+        // Validate password
+        if (empty(trim($_POST["password"]))) {
             $password_err = "Please enter your password.";
-        } else{
+        } else {
             $password = trim($_POST["password"]);
         }
-        
-        // Validate credentials
-        if(empty($username_err) && empty($password_err)){
-        
+
+        // Check credentials
+        if (empty($username_err) && empty($password_err)) {
+
             $sql = "SELECT id, username, password FROM admin WHERE username = ?";
-            
-            if($stmt = $db->prepare($sql)){
-            
+        
+            if ($stmt = $db->prepare($sql)) {
                 $stmt->bind_param("s", $param_username);
-                
-                // Set parameters
                 $param_username = $username;
-                
-                //execute
-                if($stmt->execute()){
-                    // Store result
+        
+                if ($stmt->execute()) {
                     $stmt->store_result();
-                    
-                    // Check if username exists, if yes then verify password
-                    if($stmt->num_rows == 1){                    
+        
+                    // Check if username exists
+                    if ($stmt->num_rows == 1) {
                         // Bind result variables to allow fetching
-                        $stmt->bind_result($id, $username, $password);
-                        if($stmt->fetch()){
-                             
+                        $stmt->bind_result($id, $username, $hashed_password);
+        
+                        if ($stmt->fetch()) {
+                            // After fetch(), the variables $id, $username, and $hashed_password
+                            //the id,username and hashed password is equal to the column id,username and password 
+                            if (password_verify($password, $hashed_password)) {
+                              
                                 session_start();
-                                
-                                // Store data in session variables
                                 $_SESSION["loggedin"] = true;
                                 $_SESSION["id"] = $id;
-                                $_SESSION["username"] = $username;                            
-                                
-                                // Redirect user to welcome page
-                                header("location: admin.php");
+                                $_SESSION["username"] = $username;
+        
+                                // Redirect to admin page
+                                header("Location: admin.php");
+                                exit();
+                            } else {
+                             
+                                $login_err = "Invalid username or password.";
+                            }
                         }
-                    } else{
-                        // Username doesn't exist, display a generic error message
+                    } else {
+                     
                         $login_err = "Invalid username or password.";
                     }
-                } else{
+                } else {
                     echo "Oops! Something went wrong. Please try again later.";
                 }
-
+        
                 // Close statement
                 $stmt->close();
             }
         }
-        
         // Close connection
         $db->close();
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

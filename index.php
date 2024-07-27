@@ -16,7 +16,7 @@
     data-aos-easing="ease-in-sine">
         <div class="flex-50">
             <div class="img-holder img">
-            <img src="image/model1.JPG"  alt="Model1">
+            <img src="image/static-img/img1.JPG"  alt="Model1">
             </div>
             <div class="text-holder">
             <h5>Capturing Moments: A Visual Journey Through Life</h5>
@@ -51,7 +51,7 @@
             </p>
         </div>
             <div class="img-holder img">
-            <img src="image/model2.JPG" alt="Model1">
+            <img src="image/static-img/img2.JPG" alt="Model1">
             </div>
         </div>
     </section>

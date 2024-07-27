@@ -1,3 +1,12 @@
+<?php
+     session_start();
+
+     // Check if the user is logged in
+     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+      header('Location: admin.php');
+      exit();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,8 +39,8 @@
         <i class="fa-solid fa-bars" id="bar"></i>
         <div class="logo">
           <a href="index.html"
-            ><img src="image/logo.png" alt="D'Leverage Logo"
-          /></a>
+            ><img src="image/static-img/logo.png" alt="D'Leverage Logo"
+            /></a>
         </div>
         <div></div>
       </div>

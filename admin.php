@@ -1,5 +1,13 @@
 <?php
     require_once 'connection.php';
+
+    session_start();
+
+    // Check if the user is logged in
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+        header('Location: adminLogin.php'); 
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,7 +86,6 @@
             <form action="upload.php" method="POST" class="mt-5" enctype="multipart/form-data" id="uploadForm">
                 <label for="category">Select Category:</label>
                 <select name="category" id="category" class="form-control">
-                    <option value="" selected></option>
                     <option value="" selected></option>
                     <option value="wedding">Wedding/Prenuptial </option>
                     <option value="birthday">Birthday</option>
@@ -226,84 +233,82 @@
 
     });
 
- 
 
+    // Dom menus
+    const add = document.getElementById('category');
+    let modal = document.querySelector('.modal');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const icons = document.querySelectorAll('.icon');
 
-        // Dom menus
-        const add = document.getElementById('category');
-        let modal = document.querySelector('.modal');
-        const uploadBtn = document.getElementById('uploadBtn');
-        const icons = document.querySelectorAll('.icon');
-
-        // Function to remove 'active' class from all elements
-        function removeActiveFromAll() {
-            icons.forEach(icon => {
-                const nextElement = icon.nextElementSibling;
-                if (nextElement) {
-                    nextElement.classList.remove('active');
-                }
-            });
-        }
-
-        // Function to validate upload
-        function validateUpload(e) {
-            if (add.value == "add" || add.value == "") {
-                e.preventDefault();
-                alert("Please Select Category!");
-            }
-        }
-
-        // Event listeners
-        uploadBtn.addEventListener("click", validateUpload);
-
-        add.addEventListener("change", function (e) {
-            if (e.target.value == "add") {
-                modal.classList.add('active');
-            } else {
-                modal.classList.remove('active');
-            }
-        });
-
+    // Function to remove 'active' class from all elements
+    function removeActiveFromAll() {
         icons.forEach(icon => {
-            icon.addEventListener("click", function(e) {
-                const nextElement = icon.nextElementSibling;
+            const nextElement = icon.nextElementSibling;
+            if (nextElement) {
+                nextElement.classList.remove('active');
+            }
+        });
+    }
 
-                if (nextElement) {
-                    if (nextElement.classList.contains('active')) {
-                        nextElement.classList.remove('active');
-                    } else {
-                        removeActiveFromAll();
-                        nextElement.classList.add('active');
-                    }
+    // Function to validate upload
+    function validateUpload(e) {
+        if (add.value == "add" || add.value == "") {
+            e.preventDefault();
+            alert("Please Select Category!");
+        }
+    }
+
+    // Event listeners
+    uploadBtn.addEventListener("click", validateUpload);
+
+    add.addEventListener("change", function (e) {
+        if (e.target.value == "add") {
+            modal.classList.add('active');
+        } else {
+            modal.classList.remove('active');
+        }
+    });
+
+    icons.forEach(icon => {
+        icon.addEventListener("click", function(e) {
+            const nextElement = icon.nextElementSibling;
+
+            if (nextElement) {
+                if (nextElement.classList.contains('active')) {
+                    nextElement.classList.remove('active');
+                } else {
+                    removeActiveFromAll();
+                    nextElement.classList.add('active');
                 }
+            }
 
-                // Prevent event from propagating to window click handler
-                e.stopPropagation();
-            });
+            // Prevent event from propagating to window click handler
+            e.stopPropagation();
         });
+    });
 
-        // Window click event listener
-        window.addEventListener("click", function() {
-            removeActiveFromAll();
-        });
+    // Window click event listener
+    window.addEventListener("click", function() {
+        removeActiveFromAll();
+    });
 
-        // Dom menu upload and modify tabs
-        const tabs = document.querySelectorAll('[data-tab-target]');
-        const tabContents = document.querySelectorAll('[data-tab-content]');
+    // Dom menu upload and modify tabs
+    const tabs = document.querySelectorAll('[data-tab-target]');
+    const tabContents = document.querySelectorAll('[data-tab-content]');
 
-        tabs.forEach(tab =>{
-            tab.addEventListener("click",()=>{
-                const target = document.querySelector(tab.dataset.tabTarget);
-                tabContents.forEach(tabContent =>{
-                    tabContent.classList.remove('active');
-                })
-                tabs.forEach(tab =>{
-                    tab.classList.remove('active');
-                })
-                target.classList.add('active');
-                tab.classList.add('active');
+    tabs.forEach(tab =>{
+        tab.addEventListener("click",()=>{
+            const target = document.querySelector(tab.dataset.tabTarget);
+            tabContents.forEach(tabContent =>{
+                tabContent.classList.remove('active');
             })
+            tabs.forEach(tab =>{
+                tab.classList.remove('active');
+            })
+            target.classList.add('active');
+            tab.classList.add('active');
         })
+    })
     </script>
 </body>
 </html>
