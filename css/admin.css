@@ -20,6 +20,9 @@ main{
     position: relative;
     max-width: 95%;
 }
+.img_id{
+    display: none;
+}
 .modal{
    display: none;
 }

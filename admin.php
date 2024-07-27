@@ -131,38 +131,41 @@
         </div>
     </main>
     <script>
-     document.addEventListener('DOMContentLoaded', () => {
-            const filterList = document.getElementById('filter-list');
-            const tableBody = document.querySelector('.image_table tbody');
+    document.addEventListener('DOMContentLoaded', () => {
+        const filterList = document.getElementById('filter-list');
+        const tableBody = document.querySelector('.image_table tbody');
 
-            filterList.addEventListener('click', (event) => {
-                const filter = event.target.getAttribute('data-filter');
-                console.log(filter)
-                if (filter) {
-                    fetchImages(filter);
-                }
-            });
+        // Event listener for filter buttons
+        filterList.addEventListener('click', (event) => {
+            const filter = event.target.getAttribute('data-filter');
+            console.log(filter);
+            if (filter) {
+                fetchImages(filter);
+            }
+        });
 
-            function fetchImages(filter) {
-                const xhr = new XMLHttpRequest();
-                xhr.open('GET', `adminRequest.php?filter=${filter}`, true);
-                xhr.onload = function() {
-                    if (xhr.status === 200) {
-                        let html = '';
-                        let response;
-                        if(this.responseText == "no"){
-                          html = '<h1 class="mt-5 text-secondary text-center"> No Image Yet</h1>';
-                          tableBody.innerHTML = html;
-                        }else{
-                            try {
+        // Function to fetch images based on the filter
+        function fetchImages(filter) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `adminRequest.php?filter=${filter}`, true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    let html = '';
+                    let response;
+                    if (this.responseText == "no") {
+                        html = '<h1 class="mt-5 text-secondary text-center"> No Image Yet</h1>';
+                        tableBody.innerHTML = html;
+                    } else {
+                        try {
                             response = JSON.parse(this.responseText);
                             response.forEach(img => {
                                 html += `
                                     <tr>
+                                        <td class="img_id">${img.id}</td>
                                         <td><img src="image/${img.filename}" alt="${img.filename}" width="100"></td>
                                         <td>${img.filename}</td>
                                         <td>${img.category}</td>
-                                        <td><button class="btn btn-danger" onclick="deleteImage('${img.filename}')">Delete</button></td>
+                                        <td><button class="btn btn-danger delete" data-filename="${img.filename}">Delete</button></td>
                                     </tr>
                                 `;
                             });
@@ -170,24 +173,60 @@
                         } catch (error) {
                             console.error("Error Parsing JSON: ", error);
                         }
-                        }
-                        
-                    } else {
-                        tableBody.innerHTML = 'Error loading images.';
                     }
-                };
-                xhr.send();
-            }
+                } else {
+                    tableBody.innerHTML = 'Error loading images.';
+                }
+            };
+            xhr.send();
+        }
 
-            // Initial load
-            fetchImages('all');
+        // Initial load
+        fetchImages('all');
+
+        // Event delegation for dynamically created delete buttons
+        tableBody.addEventListener('click', (event) => {
+            if (event.target.classList.contains('delete')) {
+                // Get the filename from the button's data attribute
+                const filename = event.target.getAttribute('data-filename');
+                
+                // Call the deleteImage function and pass the event and filename
+                deleteImage(event, filename);
+            }
         });
 
-        function deleteImage(filename) {
-            // Function to handle image deletion
-            // Implement AJAX request for deleting an image
-            console.log(`Delete ${filename}`);
-        }
+        function deleteImage(event, filename) {
+            event.preventDefault();
+            const row = event.target.closest('tr');
+            const imgIdElement = row.querySelector('.img_id');
+            const img_id = imgIdElement ? imgIdElement.textContent : 'ID not found';
+            // Log the image ID to the console
+            console.log(img_id);
+
+            const xhr = new XMLHttpRequest();
+
+            xhr.open("POST", "deleteImage.php",true);
+            xhr.setRequestHeader("Content-type", 'application/x-www-form-urlencoded');
+
+            xhr.onload = function(){
+                if(xhr.status === 200){
+                    fetchImages('all');
+                }else{
+                    console.error('Error deleting image:', xhr.statusText);
+                }
+            }
+            xhr.onerror = function() {
+                console.error('Error deleting image:', xhr.statusText);
+            };
+            
+            const data = `click_delete_btn=true&img_id=${encodeURIComponent(img_id)}&filename=${encodeURIComponent(filename)}`;
+
+            xhr.send(data);
+        }   
+
+    });
+
+ 
 
 
         // Dom menus
@@ -245,7 +284,6 @@
 
         // Window click event listener
         window.addEventListener("click", function() {
-            console.log('hi');
             removeActiveFromAll();
         });
 
