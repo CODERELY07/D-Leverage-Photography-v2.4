@@ -27,8 +27,7 @@ if ($result->num_rows > 0) {
     header("Content-Type: application/json");
     echo json_encode($result_array);
 } else {
-    header("Content-Type: application/json");
-    echo json_encode([]);
+    echo "no";
 }
 
 $stmt->close();

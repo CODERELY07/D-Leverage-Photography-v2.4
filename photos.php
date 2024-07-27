@@ -9,61 +9,46 @@
         <h3>Photos</h3>
     </div>
     <div class="box">
-        <!-- <div data-aos="fade-down"
-        data-aos-easing="linear"
-        data-aos-duration="1000" class="layout">
-            <img src="image/model16.JPG" alt="" loading="lazy">
-            <img src="image/model10.JPG" alt="" loading="lazy">
-            <img src="image/birthday1.JPG" alt="" loading="lazy">
-            <img src="image/birthday2.JPG" alt="" loading="lazy">
-            <img src="image/birthday3.JPG" alt="" loading="lazy">
-        </div>
-        <div data-aos="fade-down"
-        data-aos-easing="linear"
-        data-aos-duration="1400" class="layout">
-            <img src="image/birthday4.JPG" alt="" loading="lazy">
-            <img src="image/img1.1.JPG" alt="" loading="lazy">
-            <img src="image/model17.PNG" alt="" loading="lazy">
-            <img src="image/model11.JPG" alt="" loading="lazy">
-            <img src="image/model12.JPG" alt="" loading="lazy">
-        </div>
-        <div data-aos="fade-down"
-        data-aos-easing="linear"
-        data-aos-duration="1800" class="layout">
-            <img src="image/model13.JPG" alt="" loading="lazy">
-            <img src="image/model14.JPG" alt="" loading="lazy">
-            <img src="image/model15.JPG" alt="" loading="lazy">
-            <img  src="image/birthday6.JPG" alt="" loading="lazy">
-            <img src="image/birthday7.JPG" alt="" loading="lazy">
-        </div> -->
+    <?php
+        // Define the SQL query to select all images from the 'image' table
+        $query = "SELECT * FROM image";
 
-        <?php
-            $query = "SELECT * FROM image";
-            $result = $db->query($query);
+        // Execute the query and store the result in $result
+        $result = $db->query($query);
 
-            if($result->num_rows > 0){
+        // Check if the query returned any rows
+        if ($result->num_rows > 0) {
+            // Calculate the number of images to display per div
+            // This ensures that the images are evenly distributed across multiple divs
+            $images_per_div = ceil($result->num_rows / 3); 
+            
+            $image_count = 0;  // Initialize the image counter
+            $div_count = 0;    // Initialize the div counter
 
-                $images_per_div = ceil($result->num_rows / 3); 
-                
-                $image_count = 0;
-                $div_count = 0;
-
-                while($data = $result->fetch_assoc()){
-                    if ($image_count % $images_per_div == 0) {
-                        if ($image_count > 0) {
-                            echo '</div>'; 
-                        }
-                        echo '<div data-aos="fade-down" data-aos-easing="linear"  data-aos-duration="1000" class="layout">';
-                        $div_count++;
+            // Loop through the result set
+            while($data = $result->fetch_assoc()){
+                // Check if it's time to start a new div
+                if ($image_count % $images_per_div == 0) {
+                    // Close the previous div if it exists (not the first div)
+                    if ($image_count > 0) {
+                        echo '</div>'; 
                     }
-                    echo '<img src="./image/' . $data['filename'] . '" alt="" loading="lazy">';
-                    $image_count++;
+                    // Start a new div with specific attributes for animation and layout
+                    echo '<div data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000" class="layout">';
+                    $div_count++;
                 }
-                echo '</div>';
+                // Output the image tag with the source set to the filename from the database
+                echo '<img src="./image/' . $data['filename'] . '" alt="" loading="lazy">';
+                $image_count++;
             }
+            // Close the last div after the loop completes
+            echo '</div>';
+        }
 
-            $db->close();
+        // Close the database connection
+        $db->close();
         ?>
+
 
     </div>
     </div>

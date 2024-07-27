@@ -10,55 +10,75 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/admin.css?v=<?php echo time(); ?>">
+    <style>
+        [data-tab-content]{
+            display:none;
+        }
+        .active[data-tab-content]{
+            display:block;
+        }
+    </style>
 </head>
 <body>
     <main>
         <h2>Welcome, Admin</h2>
         <p>What is our business today?</p>
-        <!-- <div class="modal">
-            <input type="text" class="form-control" name="addCat" id="addCat">
-            <button id="addCatBtn" class="btn btn-primary" onclick="addNewCategory()">Add</button>
-        </div> -->
         <div class="setting">
             <div class="hidden-parent">
-                <i class="fa-solid fa-caret-down icon"></i>
+                <button type="button" class="btn icon btn-primary">
+                    <i class="fa-solid fa-caret-down"></i>
+                </button>
                 <div class="hidden">
                     <ul class="bg-secondary text-white rounded p-3">
-                        <li class="mb-2">Upload Photos</li>
-                        <li class="mb-2">Modify Photos</li>
+                        <li class="mb-2" data-tab-target="#upload-img" class="active tab">Upload Photos</li>
+                        <li class="mb-2"  data-tab-target="#modify"  class="tab">Modify Photos</li>
                     </ul>
                 </div>
             </div>
             <div class="hidden-parent">
-                <i class="fa-solid fa-message icon"></i>
-                
+                    <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary icon" data-toggle="modal" data-target="#exampleModal">
+                    <i class="fa-solid fa-message "></i>
+                </button>
+                <div class="hidden">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="hidden-parent">
-                <i class="fa-solid fa-gear icon"></i>
+                <button type="button" class="btn icon btn-primary">
+                    <i class="fa-solid fa-gear "></i>
+                </button>
+               
                 <div class="hidden">
                     <a href="logout.php">Logout</a>
                 </div>
             </div>
-           
         </div>
 
-        <div class="hide">
+        <div class="tab-content">
+        <div class="active" data-tab-content id="upload-img">
             <form action="upload.php" method="POST" class="mt-5" enctype="multipart/form-data" id="uploadForm">
                 <label for="category">Select Category:</label>
                 <select name="category" id="category" class="form-control">
                     <option value="" selected></option>
-                    <!-- <//?php
-                        $query = "SELECT DISTINCT category FROM image";
-                        $result = $db->query($query);
-
-                        if($result->num_rows > 0){
-                            while($row = $result->fetch_assoc()){
-                                $category = htmlspecialchars($row['category']); // Sanitize output
-                                echo "<option value='$category'>$category</option>";
-                            }
-                        }
-                    
-                    ?> -->
                     <option value="" selected></option>
                     <option value="wedding">Wedding/Prenuptial </option>
                     <option value="birthday">Birthday</option>
@@ -69,8 +89,8 @@
                 <input type="submit" id="uploadBtn" value="Upload Files" class="btn btn-primary mt-3" name="upload">
             </form>
         </div>
-        <div class="hide mt-4">
-           <div class="container">
+        <div data-tab-content id="modify" class="mt-4">
+           <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
                     <div class="hidden-parent filter">
@@ -90,18 +110,24 @@
                     <div class="card-text"> 
                         <form>
                             <table class="image_table table table-striped table-border">
-                                <tr>
-                                    <td>Image</td>
-                                    <td>Image Name</td>
-                                    <td>Image Category</td>
-                                    <td>Action</td>
-                                </tr>
+                                <thead>
+                                    <tr>
+                                        <td>Image</td>
+                                        <td>Image Name</td>
+                                        <td>Image Category</td>
+                                        <td>Action</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
                             </table>
                         </form>
                     </div>
                 </div>
             </div>
            </div>
+        </div>
         </div>
     </main>
     <script>
@@ -111,6 +137,7 @@
 
             filterList.addEventListener('click', (event) => {
                 const filter = event.target.getAttribute('data-filter');
+                console.log(filter)
                 if (filter) {
                     fetchImages(filter);
                 }
@@ -123,7 +150,11 @@
                     if (xhr.status === 200) {
                         let html = '';
                         let response;
-                        try {
+                        if(this.responseText == "no"){
+                          html = '<h1 class="mt-5 text-secondary text-center"> No Image Yet</h1>';
+                          tableBody.innerHTML = html;
+                        }else{
+                            try {
                             response = JSON.parse(this.responseText);
                             response.forEach(img => {
                                 html += `
@@ -139,6 +170,8 @@
                         } catch (error) {
                             console.error("Error Parsing JSON: ", error);
                         }
+                        }
+                        
                     } else {
                         tableBody.innerHTML = 'Error loading images.';
                     }
@@ -157,29 +190,10 @@
         }
 
 
-
-
+        // Dom menus
         const add = document.getElementById('category');
         let modal = document.querySelector('.modal');
         const uploadBtn = document.getElementById('uploadBtn');
-
-        uploadBtn.addEventListener("click",validateUpload);
-        add.addEventListener("change", function (e){
-            if(e.target.value == "add"){
-                modal.classList.add('active');
-            }else{
-                modal.classList.remove('active');
-            }
-        });
-        function validateUpload(e){
-            if(add.value == "add" || add.value == ""){
-                e.preventDefault();
-                alert("Please Select Category!");
-            }else{
-                return ;
-            }
-        }
-
         const icons = document.querySelectorAll('.icon');
 
         // Function to remove 'active' class from all elements
@@ -192,24 +206,66 @@
             });
         }
 
-        // Add event listeners to each icon
+        // Function to validate upload
+        function validateUpload(e) {
+            if (add.value == "add" || add.value == "") {
+                e.preventDefault();
+                alert("Please Select Category!");
+            }
+        }
+
+        // Event listeners
+        uploadBtn.addEventListener("click", validateUpload);
+
+        add.addEventListener("change", function (e) {
+            if (e.target.value == "add") {
+                modal.classList.add('active');
+            } else {
+                modal.classList.remove('active');
+            }
+        });
+
         icons.forEach(icon => {
-            icon.addEventListener("click", function() {
+            icon.addEventListener("click", function(e) {
                 const nextElement = icon.nextElementSibling;
-                
+
                 if (nextElement) {
-                    // Check if the element is already active
                     if (nextElement.classList.contains('active')) {
-                        // If active, remove it
                         nextElement.classList.remove('active');
                     } else {
-                        // Otherwise, remove 'active' from all and then add it to this one
                         removeActiveFromAll();
                         nextElement.classList.add('active');
                     }
                 }
+
+                // Prevent event from propagating to window click handler
+                e.stopPropagation();
             });
         });
+
+        // Window click event listener
+        window.addEventListener("click", function() {
+            console.log('hi');
+            removeActiveFromAll();
+        });
+
+        // Dom menu upload and modify tabs
+        const tabs = document.querySelectorAll('[data-tab-target]');
+        const tabContents = document.querySelectorAll('[data-tab-content]');
+
+        tabs.forEach(tab =>{
+            tab.addEventListener("click",()=>{
+                const target = document.querySelector(tab.dataset.tabTarget);
+                tabContents.forEach(tabContent =>{
+                    tabContent.classList.remove('active');
+                })
+                tabs.forEach(tab =>{
+                    tab.classList.remove('active');
+                })
+                target.classList.add('active');
+                tab.classList.add('active');
+            })
+        })
     </script>
 </body>
 </html>

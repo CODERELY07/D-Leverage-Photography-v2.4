@@ -27,6 +27,7 @@ const header = document.querySelectorAll(".fix");
         mobileBar.classList.add('fa-bars');
     }
 })   
+
 const loading = document.querySelectorAll(".img");
 loading.forEach((div) => {
   const img = div.querySelector("img");

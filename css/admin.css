@@ -8,8 +8,12 @@ ul{
 }
 ul li{
     cursor: pointer;
+    padding: 10px;
 }
-
+ul li:hover{
+    background-color: #fff !important;
+    color: #000 !important;
+}
 main{
     width:800px;
     margin: 150px auto;

@@ -1,17 +1,19 @@
 <?php
-    require_once 'connection.php';
 
+    require_once 'connection.php';
     session_start();
 
+    //redirect the user in the admin.php if it's currently login
     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
         header('locaton:admin.php');
         exit();
     }
-   
+    
+    // initialize variable
     $username = $password = "";
     $username_err = $password_err = $login_err = "";
     
- 
+    //check if the method is post
     if($_SERVER["REQUEST_METHOD"] == "POST"){
     
         // Check if username is empty
@@ -40,14 +42,14 @@
                 // Set parameters
                 $param_username = $username;
                 
-        
+                //execute
                 if($stmt->execute()){
                     // Store result
                     $stmt->store_result();
                     
                     // Check if username exists, if yes then verify password
                     if($stmt->num_rows == 1){                    
-                        // Bind result variables
+                        // Bind result variables to allow fetching
                         $stmt->bind_result($id, $username, $password);
                         if($stmt->fetch()){
                              
