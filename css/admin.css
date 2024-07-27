@@ -3,6 +3,13 @@
     margin: 0;
     box-sizing: border-box;
 }
+ul{
+    list-style: none;
+}
+ul li{
+    cursor: pointer;
+}
+
 main{
     width:800px;
     margin: 150px auto;
@@ -24,18 +31,47 @@ main{
     height: max-content;
     max-width: 100%;
 }
-.setting ,i{
+.setting{
+    display: flex;
+    gap: 20px;
     width: max-content;
     position: absolute;
     right: 0;
     cursor: pointer;
     top: 0;
 }
-.logoutBtn{
-    margin-top: 20px;
+.hidden{
+    margin-top: 0px;
+    width: max-content;
+    right: 0;
+    z-index:50;
     transform: scale(0);
+    position: absolute;
     transition: transform .3s;
 }
-.logoutBtn.active{
+.hidden-parent{
+    position: relative;
+}
+.filter{
+    cursor: pointer;
+    width: max-content;
+}
+.filter .hidden{
+    left: 30px;
+}
+.hidden.active{
     transform: scale(1);
+}
+.image_table{
+    height: 300px;
+    position: relative;
+    text-align: center;
+}
+.image_table td{
+    width: 32.5%;
+}
+.image_table img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

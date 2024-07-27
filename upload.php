@@ -52,5 +52,7 @@ if (isset($_POST['upload'])) {
     }
     // Close database connection
     $db->close();
+    echo header("Location: admin.php");
+    exit();
 }
 ?>
