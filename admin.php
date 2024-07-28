@@ -45,29 +45,11 @@
             </div>
             <div class="hidden-parent">
                     <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary icon" data-toggle="modal" data-target="#exampleModal">
+                <button type="button" class="btn btn-info btn-lg"  data-tab-target="#message" class="tab">
                     <i class="fa-solid fa-message "></i>
                 </button>
                 <div class="hidden">
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                ...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
             <div class="hidden-parent">
@@ -82,59 +64,101 @@
         </div>
 
         <div class="tab-content">
-        <div class="active" data-tab-content id="upload-img">
-            <form action="upload.php" method="POST" class="mt-5" enctype="multipart/form-data" id="uploadForm">
-                <label for="category">Select Category:</label>
-                <select name="category" id="category" class="form-control">
-                    <option value="" selected></option>
-                    <option value="wedding">Wedding/Prenuptial </option>
-                    <option value="birthday">Birthday</option>
-                    <option value="others">Others</option>
-                </select>
-                <br><br>
-                <input type="file" name="uploadImg[]" class="form-control" multiple>
-                <input type="submit" id="uploadBtn" value="Upload Files" class="btn btn-primary mt-3" name="upload">
-            </form>
-        </div>
-        <div data-tab-content id="modify" class="mt-4">
-           <div class="container-fluid">
-            <div class="card">
-                <div class="card-header">
-                    <div class="hidden-parent filter">
-                        <span class='icon'>Filter  <i class="fa-solid fa-caret-down"></i></span>
-                        <div class="hidden">
-                        <ul id="filter-list" class="bg-secondary text-white rounded p-3">
-                            <li class="mb-2" data-filter="all">All</li>
-                            <li class="mb-2" data-filter="wedding">Wedding/Prenuptial</li>
-                            <li class="mb-2" data-filter="birthday">Birthday</li>
-                            <li class="mb-2" data-filter="others">Others</li>
-                        </ul>
+            <div class="active" data-tab-content id="upload-img">
+                <form action="upload.php" method="POST" class="mt-5" enctype="multipart/form-data" id="uploadForm">
+                    <label for="category">Select Category:</label>
+                    <select name="category" id="category" class="form-control">
+                        <option value="" selected></option>
+                        <option value="wedding">Wedding/Prenuptial </option>
+                        <option value="birthday">Birthday</option>
+                        <option value="others">Others</option>
+                    </select>
+                    <br><br>
+                    <input type="file" name="uploadImg[]" class="form-control" multiple>
+                    <input type="submit" id="uploadBtn" value="Upload Files" class="btn btn-primary mt-3" name="upload">
+                </form>
+            </div>
+            <div data-tab-content id="modify" class="mt-4">
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="hidden-parent filter">
+                            <span class='icon'>Filter  <i class="fa-solid fa-caret-down"></i></span>
+                            <div class="hidden">
+                            <ul id="filter-list" class="bg-secondary text-white rounded p-3">
+                                <li class="mb-2" data-filter="all">All</li>
+                                <li class="mb-2" data-filter="wedding">Wedding/Prenuptial</li>
+                                <li class="mb-2" data-filter="birthday">Birthday</li>
+                                <li class="mb-2" data-filter="others">Others</li>
+                            </ul>
 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body" style="overflow-x:auto;">
+                        <div class="card-text"> 
+                            <form>
+                                <table class="image_table table table-striped table-border">
+                                    <thead>
+                                        <tr>
+                                            <td>Image</td>
+                                            <td>Image Name</td>
+                                            <td>Image Category</td>
+                                            <td>Action</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="card-text"> 
-                        <form>
-                            <table class="image_table table table-striped table-border">
-                                <thead>
-                                    <tr>
-                                        <td>Image</td>
-                                        <td>Image Name</td>
-                                        <td>Image Category</td>
-                                        <td>Action</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                </tbody>
-                            </table>
-                        </form>
-                    </div>
-                </div>
             </div>
-           </div>
-        </div>
+            </div>
+            <div data-tab-content id="message" class="mt-4 messages">
+                <table class="table table-striped">
+                    <tr>
+                        <td>Messages:</td>
+                        <?php
+                            $query = "SELECT * FROM contactData";
+                            $result = $db->query($query);
+
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>
+                                        <div class='grid' '>
+                                            <p>
+                                                Fullname: {$row['fullname']}<br>
+                                                Email: {$row['email']}<br>
+                                            
+                                                PhoneNumber: {$row['phonenumber']}<br>
+                                                Shoot Date: {$row['shootdate']}<br>
+                                            </p>
+                                            <p>
+                                                Location: {$row['location']}<br>
+                                                Service:  {$row['service']}<br>
+                                            
+                                                Session: {$row['session']}<br>
+                                                Message:  {$row['message']}
+                                            </p>
+                                            <div id='{$row["id"]}'> 
+                                                 <a href='mailto:{$row["email"]}'>Send email</a>
+                                                <br><br>
+                                                <button class='btn btn-danger deleteMessage'>Delete</delete>
+                                            </div>
+                                        </div>
+                                    </td>";
+                                    echo "</tr>";
+                                }
+                            }
+                            $db->close();
+                        ?>
+                    </tr>
+                </table>
+            </div>
         </div>
     </main>
     <script>
@@ -188,16 +212,12 @@
             xhr.send();
         }
 
-        // Initial load
         fetchImages('all');
 
-        // Event delegation for dynamically created delete buttons
         tableBody.addEventListener('click', (event) => {
             if (event.target.classList.contains('delete')) {
-                // Get the filename from the button's data attribute
+              
                 const filename = event.target.getAttribute('data-filename');
-                
-                // Call the deleteImage function and pass the event and filename
                 deleteImage(event, filename);
             }
         });
@@ -230,85 +250,122 @@
 
             xhr.send(data);
         }   
-
-    });
-
-
-    // Dom menus
-    const add = document.getElementById('category');
-    let modal = document.querySelector('.modal');
-    const uploadBtn = document.getElementById('uploadBtn');
-    const icons = document.querySelectorAll('.icon');
-
-    // Function to remove 'active' class from all elements
-    function removeActiveFromAll() {
-        icons.forEach(icon => {
-            const nextElement = icon.nextElementSibling;
-            if (nextElement) {
-                nextElement.classList.remove('active');
-            }
-        });
-    }
-
-    // Function to validate upload
-    function validateUpload(e) {
-        if (add.value == "add" || add.value == "") {
-            e.preventDefault();
-            alert("Please Select Category!");
-        }
-    }
-
-    // Event listeners
-    uploadBtn.addEventListener("click", validateUpload);
-
-    add.addEventListener("change", function (e) {
-        if (e.target.value == "add") {
-            modal.classList.add('active');
-        } else {
-            modal.classList.remove('active');
-        }
-    });
-
-    icons.forEach(icon => {
-        icon.addEventListener("click", function(e) {
-            const nextElement = icon.nextElementSibling;
-
-            if (nextElement) {
-                if (nextElement.classList.contains('active')) {
-                    nextElement.classList.remove('active');
+        
+        // DElete messages
+        document.querySelectorAll('.deleteMessage').forEach(function(btn){
+            btn.addEventListener("click",function(e){
+            
+            if (confirm("Are you sure you want to delete this Message?")) {
+                const div = e.target.closest('div');
+                if (div) {
+                    const divId =div.id;
+                    const xhr = new XMLHttpRequest();
+                    xhr.open("POST", "deleteMessages.php", true);
+                    
+                    xhr.onload = function() {
+                        if (xhr.status >= 200 && xhr.status < 300) {
+                            // if(this.responseText == 1){
+                            //     Swal.fire("Deleted Successfully!");
+                            // }else{
+                            //     Swal.fire({
+                            //     icon: "error",
+                            //     text: "Something went wrong!",
+                            //     });
+                            // }
+                        } else {
+                            console.error("Error deleting message: ", xhr.statusText);
+                        }
+                    };
+                    xhr.onerror = function() {
+                        console.error("Error deleting message: ", xhr.statusText);
+                    };
+                    const data = `id=${encodeURIComponent(divId)}`;
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.send(data);
                 } else {
-                    removeActiveFromAll();
-                    nextElement.classList.add('active');
+                    console.error("No div found");
                 }
+            } else {
+            
             }
-
-            // Prevent event from propagating to window click handler
-            e.stopPropagation();
-        });
-    });
-
-    // Window click event listener
-    window.addEventListener("click", function() {
-        removeActiveFromAll();
-    });
-
-    // Dom menu upload and modify tabs
-    const tabs = document.querySelectorAll('[data-tab-target]');
-    const tabContents = document.querySelectorAll('[data-tab-content]');
-
-    tabs.forEach(tab =>{
-        tab.addEventListener("click",()=>{
-            const target = document.querySelector(tab.dataset.tabTarget);
-            tabContents.forEach(tabContent =>{
-                tabContent.classList.remove('active');
             })
-            tabs.forEach(tab =>{
-                tab.classList.remove('active');
-            })
-            target.classList.add('active');
-            tab.classList.add('active');
         })
-    })
+        // Dom menus
+        const add = document.getElementById('category');
+        let modal = document.querySelector('.modal');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const icons = document.querySelectorAll('.icon');
+
+        // Function to remove 'active' class from all elements
+        function removeActiveFromAll() {
+            icons.forEach(icon => {
+                const nextElement = icon.nextElementSibling;
+                if (nextElement) {
+                    nextElement.classList.remove('active');
+                }
+            });
+        }
+
+        // Function to validate upload
+        function validateUpload(e) {
+            if (add.value == "add" || add.value == "") {
+                e.preventDefault();
+                alert("Please Select Category!");
+            }
+        }
+
+        // Event listeners
+        uploadBtn.addEventListener("click", validateUpload);
+
+        add.addEventListener("change", function (e) {
+            if (e.target.value == "add") {
+                modal.classList.add('active');
+            } else {
+                modal.classList.remove('active');
+            }
+        });
+
+        icons.forEach(icon => {
+            icon.addEventListener("click", function(e) {
+                const nextElement = icon.nextElementSibling;
+
+                if (nextElement) {
+                    if (nextElement.classList.contains('active')) {
+                        nextElement.classList.remove('active');
+                    } else {
+                        removeActiveFromAll();
+                        nextElement.classList.add('active');
+                    }
+                }
+
+                // Prevent event from propagating to window click handler
+                e.stopPropagation();
+            });
+        });
+
+        // Window click event listener
+        window.addEventListener("click", function() {
+            removeActiveFromAll();
+        });
+
+        // Dom menu upload and modify tabs
+        const tabs = document.querySelectorAll('[data-tab-target]');
+        const tabContents = document.querySelectorAll('[data-tab-content]');
+
+        tabs.forEach(tab =>{
+            tab.addEventListener("click",()=>{
+                const target = document.querySelector(tab.dataset.tabTarget);
+                tabContents.forEach(tabContent =>{
+                    tabContent.classList.remove('active');
+                })
+                tabs.forEach(tab =>{
+                    tab.classList.remove('active');
+                })
+                target.classList.add('active');
+                tab.classList.add('active');
+            })
+        })
+    });
     </script>
 </body>
 </html>

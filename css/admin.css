@@ -82,3 +82,30 @@ main{
     height: 100%;
     object-fit: cover;
 }
+.messages{
+    max-height: 1000px;
+    position: relative;
+    overflow: scroll;
+}
+.grid{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+@media only screen and (max-width:500px){
+    .grid{
+        grid-template-columns: repeat(1,1fr);
+    }
+    .setting{
+        left: 0;
+        top: -50px;
+    }
+    .hidden{
+        margin-top: 0px;
+        width: max-content;
+        left: 0;
+        z-index:50;
+        transform: scale(0);
+        position: absolute;
+        transition: transform .3s;
+    }
+}
