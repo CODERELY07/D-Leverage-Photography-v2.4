@@ -16,3 +16,16 @@ CREATE TABLE admin (
     password VARCHAR(255) NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+--create Contact data
+CREATE TABLE contactData (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    fullname VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phonenumber VARCHAR(20) NOT NULL, 
+    shootdate DATETIME NOT NULL, 
+    location VARCHAR(255) NOT NULL,
+    service VARCHAR(100) NOT NULL,
+    session VARCHAR(100) NOT NULL,
+    message TEXT NOT NULL,
+    UNIQUE (email)
+);
