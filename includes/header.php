@@ -50,8 +50,8 @@
         <li><a href="portfolio.php">Portfolio</a></li>
         <li><a href="about.php">About</a></li>
         <li class="mobile-nav-photo">
-          <a href="#" >Photos</a>
-          <div class="mobile-photos-type">
+          <a href="photos.php">Photos</a>
+          <!-- <div class="mobile-photos-type">
             <ul>
               <li><a href="#">Wedding/Prenuptial Photos</a></li>
               <li><a href="#">Birthday Photos
@@ -60,7 +60,7 @@
               <li><a href="photos.php">All Photos</a></li>
               <li></li>
             </ul>
-          </div>
+          </div> -->
         </li>
         <li class="bg-dark text-white px-5 py-1 rounded">
           <a href="contact.php">Book Now</a>
@@ -79,14 +79,14 @@
           </li>
           <li class="photo">
             <a href="photos.php">Photos</a>
-            <div class="photos-type">
+            <!-- <div class="photos-type">
               <ul>
                 <li><a href="#">Wedding/Prenuptial Photos</a></li>
                 <li><a href="#">Birthday Photos
 </a></li>
                 <li><a href="#">Others</a></li>
               </ul>
-            </div>
+            </div> -->
           </li>
           <li class="bg-dark text-white px-5 py-1 rounded">
             <a href="contact.php">Book Now</a>

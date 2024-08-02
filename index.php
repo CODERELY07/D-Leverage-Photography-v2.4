@@ -6,7 +6,7 @@
 </div>
 <main>
     <article>
-    <div class="quotes">
+    <div class="quotes text-center">
         <p><b><i>"Photography is a way of feeling, of touching, of loving. What you have caught on film is captured forever... It remembers little things, long after you have forgotten everything." 
         </i></b></p>
         <p><i>- Aaron Siskind</i></p>
@@ -64,7 +64,7 @@
         <p>
         Ready to capture your special moments? Contact us today to discuss your photography needs and schedule a consultation. We look forward to being a part of your journey and creating lasting memories together.
         </p>
-        <a class="sendMessageBtn" href="contact.html">
+        <a class="sendMessageBtn" href="contact.php">
         <button type="button">
             SEND A MESSAGE
         </button>

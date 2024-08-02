@@ -91,7 +91,6 @@
                                 <li class="mb-2" data-filter="birthday">Birthday</li>
                                 <li class="mb-2" data-filter="others">Others</li>
                             </ul>
-
                             </div>
                         </div>
                     </div>
