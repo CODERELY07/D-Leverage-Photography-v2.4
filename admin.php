@@ -39,6 +39,7 @@
                 <div class="hidden">
                     <ul class="bg-secondary text-white rounded p-3">
                         <li class="mb-2" data-tab-target="#upload-img" class="active tab">Upload Photos</li>
+                        <li class="mb-2"  data-tab-target="#album"  class="tab">Upload Album</li>
                         <li class="mb-2"  data-tab-target="#modify"  class="tab">Modify Photos</li>
                     </ul>
                 </div>
@@ -79,42 +80,98 @@
                 </form>
             </div>
             <div data-tab-content id="modify" class="mt-4">
-            <div class="container-fluid">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="hidden-parent filter">
-                            <span class='icon'>Filter  <i class="fa-solid fa-caret-down"></i></span>
-                            <div class="hidden">
-                            <ul id="filter-list" class="bg-secondary text-white rounded p-3">
-                                <li class="mb-2" data-filter="all">All</li>
-                                <li class="mb-2" data-filter="wedding">Wedding/Prenuptial</li>
-                                <li class="mb-2" data-filter="birthday">Birthday</li>
-                                <li class="mb-2" data-filter="others">Others</li>
-                            </ul>
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="hidden-parent filter">
+                                <span class='icon'>Filter  <i class="fa-solid fa-caret-down"></i></span>
+                                <div class="hidden">
+                                <ul id="filter-list" class="bg-secondary text-white rounded p-3">
+                                    <li class="mb-2" data-filter="all">All</li>
+                                    <li class="mb-2" data-filter="wedding">Wedding/Prenuptial</li>
+                                    <li class="mb-2" data-filter="birthday">Birthday</li>
+                                    <li class="mb-2" data-filter="others">Others</li>
+                                </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-body" style="overflow-x:auto;">
-                        <div class="card-text"> 
-                            <form>
-                                <table class="image_table table table-striped table-border">
-                                    <thead>
-                                        <tr>
-                                            <td>Image</td>
-                                            <td>Image Name</td>
-                                            <td>Image Category</td>
-                                            <td>Action</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                        <div class="card-body" style="overflow-x:auto;">
+                            <div class="card-text"> 
+                                <form>
+                                    <table class="image_table table table-striped table-border">
+                                        <thead>
+                                            <tr>
+                                                <td>Image</td>
+                                                <td>Image Name</td>
+                                                <td>Image Category</td>
+                                                <td>Action</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-                                    </tbody>
-                                </table>
-                            </form>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div data-tab-content id="album" class="mt-4">
+                <div class="card">
+                    <div class="card-body" style="overflow-x:hidden">
+                        <form action="uploadAlbum.php" enctype="multipart/form-data" method="post">
+                            <h4>Upload New Album</h4>
+                            <div class="inputFields">
+                                <label for="album-name">Album Name</label>
+                                <input type="text" name="album-name" id="upload-name" class="form-control" required>
+                            </div>  
+                            <div class="inputFields">
+                                <label for="album-link">Album Link</label>
+                                <input type="text" name="album-link" id="upload-link" class="form-control" required>
+                            </div>  
+                            <div class="inputFields">
+                                <label for="upload-album">Your Album Image</label>
+                                <input type="file" name="upload-album" id="upload-album" class="form-control" required>
+                            </div>
+                            <input type="submit" value="Submit">
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mt-5">
+                    <?php
+                        $sql = "SELECT id, album_name, album_link, album_img FROM album";
+                        $result = $db->query($sql);
+                    ?>
+                    <table class="p-3 table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Album Name</th>
+                                <th>Album Link</th>
+                                <th>Album Image</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if ($result->num_rows > 0) {
+                                // Output data of each row
+                                while($row = $result->fetch_assoc()) {
+                                    echo "<tr id='row-" . $row['id'] . "'>";
+                                    echo "<td class='p-2'>" . htmlspecialchars($row['album_name']) . "</td>";
+                                    echo "<td class='p-2'>" . htmlspecialchars($row['album_link']) . "</td>";
+                                    echo "<td class='p-2'><img src='image/upload-album/" . htmlspecialchars($row['album_img']) . "' alt='Image' width='100'></td>";
+                                    echo "<td class='p-2'><span class='delete-btn btn btn-danger' onclick='deleteAlbum(" . $row['id'] . ")'>Delete</span></td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='4'>No records found</td></tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div data-tab-content id="message" class="mt-4 messages">
                 <table class="table table-striped">
@@ -161,6 +218,7 @@
         </div>
     </main>
     <script>
+ 
     document.addEventListener('DOMContentLoaded', () => {
         const filterList = document.getElementById('filter-list');
         const tableBody = document.querySelector('.image_table tbody');
@@ -289,6 +347,8 @@
             }
             })
         })
+
+       
         // Dom menus
         const add = document.getElementById('category');
         let modal = document.querySelector('.modal');

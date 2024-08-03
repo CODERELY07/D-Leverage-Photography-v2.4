@@ -20,7 +20,7 @@
         </div>
         <div class="card">
             <div class="card-bg">
-                    <img src="image/static-img/banner.png" alt="">
+                <img src="image/static-img/banner.png" alt="">
             </div>
             <div class="cat">
                 <h2>BIRTHDAY</h2>

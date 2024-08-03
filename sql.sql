@@ -29,3 +29,10 @@ CREATE TABLE contactData (
     message TEXT NOT NULL,
     UNIQUE (email)
 );
+--create album
+CREATE TABLE album(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    album_name VARCHAR(100) NOT NULL,
+    album_link VARCHAR(100) NOT NULL,
+    album_img VARCHAR(100) NOT NULL
+)
