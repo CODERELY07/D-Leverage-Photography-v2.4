@@ -17,6 +17,8 @@
     <title>D'Leverage Admin</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    </head>
     <link rel="stylesheet" href="css/admin.css?v=<?php echo time(); ?>">
     <style>
         [data-tab-content]{
@@ -122,31 +124,41 @@
                     <div class="card-body" style="overflow-x:hidden">
                         <form action="uploadAlbum.php" enctype="multipart/form-data" method="post">
                             <h4>Upload New Album</h4>
-                            <div class="inputFields">
+                            <div class="inputFields  mt-2">
                                 <label for="album-name">Album Name</label>
                                 <input type="text" name="album-name" id="upload-name" class="form-control" required>
                             </div>  
-                            <div class="inputFields">
+                            <div class="inputFields  mt-2">
+                                <label for="album-category">Album Category</label>
+                                <select name="album-category" id="album-category" class="form-control">
+                                    <option value="" selected></option>
+                                    <option value="wedding">Wedding</option>
+                                     <option value="birthday">Birthday</option>
+                                      <option value="others">Others</option>
+                                </select>
+                            </div>  
+                            <div class="inputFields  mt-2">
                                 <label for="album-link">Album Link</label>
                                 <input type="text" name="album-link" id="upload-link" class="form-control" required>
                             </div>  
-                            <div class="inputFields">
+                            <div class="inputFields  mt-2">
                                 <label for="upload-album">Your Album Image</label>
-                                <input type="file" name="upload-album" id="upload-album" class="form-control" required>
+                                <input type="file" accept="image/*" name="upload-album" id="upload-album" class="form-control" required>
                             </div>
-                            <input type="submit" value="Submit">
+                            <input type="submit" class="btn  mt-4 btn-primary" value="Submit">
                         </form>
                     </div>
                 </div>
 
                 <div class="card mt-5">
                     <?php
-                        $sql = "SELECT id, album_name, album_link, album_img FROM album";
+                        $sql = "SELECT * FROM album";
                         $result = $db->query($sql);
                     ?>
-                    <table class="p-3 table table-striped">
+                   <table class="p-3 table table-striped">
                         <thead>
                             <tr>
+                                <th>Album Category</th>
                                 <th>Album Name</th>
                                 <th>Album Link</th>
                                 <th>Album Image</th>
@@ -158,15 +170,27 @@
                             if ($result->num_rows > 0) {
                                 // Output data of each row
                                 while($row = $result->fetch_assoc()) {
-                                    echo "<tr id='row-" . $row['id'] . "'>";
-                                    echo "<td class='p-2'>" . htmlspecialchars($row['album_name']) . "</td>";
-                                    echo "<td class='p-2'>" . htmlspecialchars($row['album_link']) . "</td>";
-                                    echo "<td class='p-2'><img src='image/upload-album/" . htmlspecialchars($row['album_img']) . "' alt='Image' width='100'></td>";
-                                    echo "<td class='p-2'><span class='delete-btn btn btn-danger' onclick='deleteAlbum(" . $row['id'] . ")'>Delete</span></td>";
-                                    echo "</tr>";
+
+                                ?>
+
+                                    <tr id="<?php echo $row['id']?>">
+                                        <td class='p-2'><?php echo $row['album_category'] ?></td>
+                                        <td class='p-2'><?php echo $row['album_name']?></td>
+                                        <td class='p-2'><a href="<?php echo $row['album_link']?>"><?php echo $row['album_link']?></a></td>
+                                        <td class='p-2'><img src='image/upload-album/<?php echo $row['album_img']; ?>' alt='Image' width='100'></td>
+                                        <td class='p-2'>
+                                            <form action="delete_album.php" method="POST">
+                                                <input type="hidden" name="delete_id" value="<?php echo $row['id']?>">
+                                                <input type="hidden" name="delete_img" value="<?php echo $row['album_img'] ?>">
+                                                <input type="submit" class="btn btn-danger" value="Delete" name="delete_img_btn">
+                                            </form>
+                                        </td>
+                                    </tr>
+                            <?php
+                                   
                                 }
                             } else {
-                                echo "<tr><td colspan='4'>No records found</td></tr>";
+                                echo "<tr><td colspan='5'>No records found</td></tr>";
                             }
                             ?>
                         </tbody>

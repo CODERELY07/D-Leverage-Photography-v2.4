@@ -8,6 +8,7 @@
 button{
     border: none !important;
 }
+
 :root{
     --ligth-color: #E8E9ED;
     --lighter-color:#fff;
@@ -347,6 +348,8 @@ footer button{
 }
 
 /* PHOTOS PAGe */
+
+
 .container{
     display: flex;
     flex-direction: column;
