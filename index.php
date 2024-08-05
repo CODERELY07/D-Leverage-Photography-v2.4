@@ -1,4 +1,5 @@
 <?php
+    $title = "D'Leverage Photography";
     require_once 'includes/header.php';
 ?>
 <div class="banner-parent"  data-aos="fade-zoom-in">

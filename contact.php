@@ -1,4 +1,5 @@
 <?php
+    $title = "Book | D'Leverage Photography";
     require_once 'includes/header.php';
 ?>
 <div style="margin-top: 200px;"></div>

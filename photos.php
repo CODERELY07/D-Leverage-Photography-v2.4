@@ -1,4 +1,5 @@
 <?php
+    $title = "Photos | D'Leverage Photography";
     require_once 'includes/header.php';
     require_once 'connection.php';
 ?>
