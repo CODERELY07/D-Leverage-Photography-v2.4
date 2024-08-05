@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require_once 'connection.php';
 error_reporting(E_ALL); // Show all errors for debugging purposes
 

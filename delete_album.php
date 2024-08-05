@@ -1,6 +1,8 @@
 <?php
 require_once 'connection.php';
 session_start();
+
+
 if(isset($_POST['delete_id']) && isset($_POST['delete_img'])){
     $id = $_POST['delete_id'];
     $name = $_POST['delete_img'];

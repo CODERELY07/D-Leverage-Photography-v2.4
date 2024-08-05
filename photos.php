@@ -9,33 +9,40 @@
         <h3>Photos</h3>
     </div>
     <div class="container album">
-        <div class="card">
-            <div class="card-bg">
-                <img src="image/static-img/banner.png" alt="">
+        <a class="card" href="photos-wedding.php">
+            <div>
+                <div class="card-bg">
+                    <img src="image/static-img/banner.png" alt="">
+                </div>
+                <div class="cat">
+                    <h2>WEDDING / PRENUPTIAL</h2>
+                </div>
+                <hr>
             </div>
-            <div class="cat">
-                <h2>WEDDING / PRENUPTIAL</h2>
+        </a>
+        <a class="card" href="photos-birthday.php">
+            <div>
+                <div class="card-bg">
+                    <img src="image/static-img/banner.png" alt="">
+                </div>
+                <div class="cat">
+                    <h2>BIRTHDAY</h2>
+                </div>
+                <hr>
             </div>
-            <hr>
-        </div>
-        <div class="card">
-            <div class="card-bg">
-                <img src="image/static-img/banner.png" alt="">
+        </a>
+        <a class="card" href="photos-others.php">
+            <div>
+                <div class="card-bg">
+                    <img src="image/static-img/banner.png" alt="">
+                </div>
+                <div class="cat">
+                    <h2>OTHERS</h2>
+                </div>
+                <hr>
             </div>
-            <div class="cat">
-                <h2>BIRTHDAY</h2>
-            </div>
-            <hr>
-        </div>
-        <div class="card">
-            <div class="card-bg">
-                <img src="image/static-img/banner.png" alt="">
-            </div>
-            <div class="cat">
-                <h2>OTHERS</h2>
-            </div>
-            <hr>
-        </div>
+        </a>
+       
     </div>
     <div class="box">
 
