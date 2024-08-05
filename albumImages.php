@@ -80,12 +80,12 @@
                     <input type="submit" name="albumSubmit" class="btn  mt-4 btn-primary" value="Submit">
                 </form>
             </div>
-            <div class="card mt-5">
+            <div class="card mt-5" style="overflow-x:auto">
                 <?php
                     $sql = "SELECT * FROM album";
                     $result = $db->query($sql);
                 ?>
-                <table class="p-3 table table-striped">
+                <table class="p-3 table table-striped" style="overflow-x:auto">
                     <thead>
                         <tr> 
                             <th>Album Image</th>
