@@ -1,6 +1,6 @@
 <?php
 require_once 'connection.php';
-session_start();
+
 if(isset($_POST['delete_id']) && isset($_POST['delete_img'])){
     $id = $_POST['delete_id'];
     $name = $_POST['delete_img'];
@@ -14,12 +14,11 @@ if(isset($_POST['delete_id']) && isset($_POST['delete_img'])){
         if(file_exists($image_path)){
             unlink($image_path); // Delete the file
         } else {
-            $_SESSION['status'] = "Image file not found.";
+            echo "Image file not found.";
         }
-        $_SESSION['status'] = "Deleted successfully";
+        echo "Deleted successfully";
     } else {
-        $_SESSION['status'] = "Delete Failed";
+        echo "Delete failed";
     }
-    header("Location: albumImages.php");
 }
 ?>

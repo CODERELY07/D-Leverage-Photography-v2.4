@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require_once 'connection.php';
 error_reporting(E_ALL); // Show all errors for debugging purposes
 
@@ -32,18 +32,18 @@ if (isset($_POST['upload'])) {
                 if (move_uploaded_file($tempname, $folder)) {
                     // Execute prepared statement to insert into database
                     if ($stmt->execute()) {
-                        $_SESSION['status'] = "Image uploaded successfully!";
+                        echo "<h3>Image uploaded successfully!</h3>";
                     } else {
-                        $_SESSION['status'] = "Failed to insert image into database!";
+                        echo "<h3>Failed to insert image into database!</h3>";
                     }
                 } else {
-                    $_SESSION['status'] = "Failed to upload image!";
+                    echo "<h3>Failed to upload image!</h3>";
                 }
-                
+
                 // Close statement
                 $stmt->close();
             } else {
-                $_SESSION['status'] = "File '$filename' already exists in database. Skipped.";
+                echo "<h3>File '$filename' already exists in database. Skipped.</h3>";
             }
 
             // Close check statement
@@ -52,7 +52,7 @@ if (isset($_POST['upload'])) {
     }
     // Close database connection
     $db->close();
-    echo header("Location: upload-portfolio.php");
+    echo header("Location: admin.php");
     exit();
 }
 ?>

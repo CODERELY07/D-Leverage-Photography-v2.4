@@ -1,114 +1,195 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+/* * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
-ul{
-    list-style: none;
+ul {
+  list-style: none;
 }
-ul li{
-    cursor: pointer;
-    padding: 10px;
+ul li {
+  cursor: pointer;
+  padding: 10px;
 }
-ul li:hover{
-    background-color: #fff !important;
-    color: #000 !important;
+ul li:hover {
+  background-color: #fff !important;
+  color: #000 !important;
 }
-main{
-    width:800px;
-    margin: 150px auto;
-    position: relative;
-    max-width: 95%;
+main {
+  width: 800px;
+  margin: 150px auto;
+  position: relative;
+  max-width: 95%;
 }
-.img_id{
-    display: none;
+.img_id {
+  display: none;
 }
-.modal{
-   display: none;
+.modal {
+  display: none;
 }
-.modal input{
-    width: 95%;
-    max-width: 300px;
+.modal input {
+  width: 95%;
+  max-width: 300px;
 }
-.modal.active{
-    display: flex;
-    gap: 10px;
-    margin-top: 100px;
-    justify-content: center;
-    height: max-content;
-    max-width: 100%;
+.modal.active {
+  display: flex;
+  gap: 10px;
+  margin-top: 100px;
+  justify-content: center;
+  height: max-content;
+  max-width: 100%;
 }
-.setting{
-    display: flex;
-    gap: 20px;
-    width: max-content;
-    position: absolute;
-    right: 0;
-    cursor: pointer;
-    top: 0;
+.setting {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  top: 0;
 }
-.hidden{
+.hidden {
+  margin-top: 0px;
+  width: max-content;
+  right: 0;
+  z-index: 50;
+  transform: scale(0);
+  position: absolute;
+  transition: transform 0.3s;
+}
+.hidden-parent {
+  position: relative;
+}
+.filter {
+  cursor: pointer;
+  width: max-content;
+}
+.filter .hidden {
+  left: 30px;
+}
+.hidden.active {
+  transform: scale(1);
+}
+.image_table {
+  height: 300px;
+  position: relative;
+  text-align: center;
+}
+.image_table td {
+  width: 32.5%;
+}
+.image_table img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.messages {
+  max-height: 1000px;
+  position: relative;
+  overflow: scroll;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+@media only screen and (max-width: 500px) {
+  .grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .setting {
+    left: 0;
+    top: -50px;
+  }
+  .hidden {
     margin-top: 0px;
     width: max-content;
-    right: 0;
-    z-index:50;
+    left: 0;
+    z-index: 50;
     transform: scale(0);
     position: absolute;
-    transition: transform .3s;
+    transition: transform 0.3s;
+  }
+} */
+
+/* reset */
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
-.hidden-parent{
-    position: relative;
+
+a{
+  color: #131313;
+  text-decoration: none;
 }
-.filter{
-    cursor: pointer;
-    width: max-content;
+ul{
+  list-style: none;
 }
-.filter .hidden{
-    left: 30px;
+ul li,
+.card,
+.user-icon,
+i{
+  cursor: pointer;
 }
-.hidden.active{
-    transform: scale(1);
+a:hover,
+ul li:hover{
+  text-decoration: underline;
 }
-.image_table{
-    height: 300px;
-    position: relative;
-    text-align: center;
+.hide,
+#filter-hide{
+  display:none;
+  z-index: 10;
 }
-.image_table td{
-    width: 32.5%;
+.active,
+#filter-hide.active{
+  display: block;
 }
-.image_table img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.absolute{
+  position: absolute;
+  bottom:-100px;
+  left:-150px;
 }
-.messages{
-    max-height: 1000px;
-    position: relative;
-    overflow: scroll;
+header{
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
 }
-.grid{
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
+.flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-@media only screen and (max-width:500px){
-    .grid{
-        grid-template-columns: repeat(1,1fr);
-    }
-    .setting{
-        left: 0;
-        top: -50px;
-    }
-    .hidden{
-        margin-top: 0px;
-        width: max-content;
-        left: 0;
-        z-index:50;
-        transform: scale(0);
-        position: absolute;
-        transition: transform .3s;
-    }
+.user-icon-con{
+  height: 50px;
+  position: relative;
+}
+.user-icon{
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+  width: 50px;
+  place-items: center;
+  display: grid;
+  color: rgb(87, 80, 80);
+  height: 50px;
+}
+.user-icon i{
+  font-size: 24px;
+}
+.dropdown{
+  padding: 10px 20px;
+  width: max-content;
+}
+
+.formInput{
+  width: 100%;
+}
+.btn-filter{
+  border: 1px solid black;
+  padding: 5px 20px;
+  background-color: #fff;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.btn-filter + div{
+  position: absolute;
 }
