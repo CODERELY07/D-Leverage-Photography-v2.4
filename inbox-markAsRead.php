@@ -1,6 +1,12 @@
 <?php
     require_once 'connection.php';
+    session_start();
 
+    // Redirect if already logged in
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+        header('Location: index.php'); 
+        exit();
+    }
     if(isset($_POST['markReadBtn']) &&isset($_POST['rowId']) && $_POST['rowId'] != ""){
         $id = mysqli_real_escape_string($db, $_POST['rowId']);
 

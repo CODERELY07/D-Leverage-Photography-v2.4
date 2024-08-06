@@ -11,9 +11,9 @@
     <div class="menu">
         <ul>
             <li class="mb-3"><h5>Menu</h5></li>
-            <li><a href="portfolio.html">Portfolio</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="photos.html">Photos</a></li>
+            <li><a href="portfolio.php">Portfolio</a></li>
+            <li><a href="about.php">About</a></li>
+            <li><a href="photos.php">Photos</a></li>
         </ul>
     </div>
     <div class="about">
@@ -36,7 +36,7 @@
     ></script>
     <!-- AOS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/script.js?v=<?php echo time(); ?>"></script>
     <script>
       AOS.init();
         // Select all .layout containers

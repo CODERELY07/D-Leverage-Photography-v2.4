@@ -3,7 +3,7 @@
 
     // Check if the user is logged in
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-        header('Location: adminLogin.php'); 
+        header('Location: index.php'); 
         exit();
     }
 ?>
@@ -71,7 +71,7 @@
                         </select>
                     </div>
                     <div class="formInput">
-                        <input type="file" name="uploadImg[]" class="form-control" multiple>
+                        <input type="file" accept="image/*" name="uploadImg[]" class="form-control" multiple>
                     </div>
                     <div class="formInput">
                         <input type="submit" id="uploadBtn" value="Upload Files" class="btn btn-primary" name="upload">

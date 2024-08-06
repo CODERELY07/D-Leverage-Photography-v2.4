@@ -41,7 +41,7 @@
       <div>
         <i class="fa-solid fa-bars" id="bar"></i>
         <div class="logo">
-          <a href="index.html"
+          <a href="index.php"
             ><img src="image/static-img/logo.png" alt="D'Leverage Logo"
             /></a>
         </div>

@@ -1,5 +1,12 @@
 <?php
 require_once 'connection.php'; // Ensure this file connects to your database
+session_start();
+
+// Redirect if already logged in
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header('Location: index.php'); 
+    exit();
+}
 
 if (isset($_POST['click_delete_btn']) && isset($_POST['img_id']) && isset($_POST['filename'])) {
     // Sanitize inputs

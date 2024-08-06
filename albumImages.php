@@ -3,7 +3,7 @@
 
     // Check if the user is logged in
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-        header('Location: adminLogin.php'); 
+        header('Location: index.php'); 
         exit();
     }
     require_once 'connection.php';

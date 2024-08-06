@@ -1,6 +1,10 @@
 <?php
 session_start();
-
+// Redirect if already logged in
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header('Location: index.php'); 
+    exit();
+}
 require_once 'connection.php';
 error_reporting(E_ALL); // Show all errors for debugging purposes
 

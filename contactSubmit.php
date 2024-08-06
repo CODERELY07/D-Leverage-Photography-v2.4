@@ -20,23 +20,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['send'])) {
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo -1;
     } else {
-        $stmt = $db->prepare("INSERT INTO contactData (fullname, email, phonenumber, shootdate, location, service, session, message) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-
-        if ($stmt === false) {
+        // Prepare the SELECT statement to check for existing email
+        $checkStmt = $db->prepare("SELECT COUNT(*) FROM contactData WHERE email = ?");
+        if ($checkStmt === false) {
             die("Prepare failed: " . $db->error);
         }
 
-        $stmt->bind_param("ssssssss", $fullname, $email, $phonenumber, $date, $location, $services, $session, $message);
+        $checkStmt->bind_param("s", $email);
+        $checkStmt->execute();
 
-        if ($stmt->execute()) {
-            echo 1;
+        $checkStmt->bind_result($emailCount);
+        $checkStmt->fetch();
+        $checkStmt->close();
+
+      
+        if ($emailCount > 0) {
+            echo -2;
         } else {
-            echo "Error: " . $stmt->error;
+            $stmt = $db->prepare("INSERT INTO contactData (fullname, email, phonenumber, shootdate, location, service, session, message) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            
+            if ($stmt === false) {
+                die("Prepare failed: " . $db->error);
+            }  
+            $stmt->bind_param("ssssssss", $fullname, $email, $phonenumber, $date, $location, $services, $session, $message);
+
+            
+            if ($stmt->execute()) {
+                echo 1;
+            } else {
+                echo "Error: " . $stmt->error;
+            }
+            $stmt->close();
         }
 
-        $stmt->close();
+        $db->close();
     }
-
-    $db->close();
 }
 ?>
