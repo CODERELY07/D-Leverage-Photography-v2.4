@@ -29,6 +29,10 @@ CREATE TABLE contactData (
     message TEXT NOT NULL,
     UNIQUE (email)
 );
+--alter table add column
+ALTER TABLE contactData
+ADD COLUMN status VARCHAR(10) NOT NULL DEFAULT 'unread';
+
 --create album
 CREATE TABLE album(
 	id INT PRIMARY KEY AUTO_INCREMENT,

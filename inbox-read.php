@@ -67,7 +67,7 @@
                             Messages: 
                             <div class="d-flex">
                                 <div class="messageNotif-container">
-                                    <span class="messageNotif-number activeMessage">
+                                    <span class="messageNotif-number">
                                         <?php 
                                             $sql = "SELECT * FROM contactdata WHERE status = 'unread'";
                                             $result = $db->query($sql) or die("Query Failed " . $db->error);
@@ -81,11 +81,11 @@
                                         ?>
                                     </span>
                                     <a href="inbox.php">
-                                        <i class="fa-solid fa-envelope activeMessage"></i>
+                                        <i class="fa-solid fa-envelope"></i>
                                     </a>
                                 </div>
                                 <div class="messageNotif-container">
-                                    <span class="messageNotif-number">
+                                    <span class="messageNotif-number activeMessage">
                                         <?php 
                                             $sql = "SELECT * FROM contactdata WHERE status = 'read'";
                                             $result = $db->query($sql) or die("Query Failed " . $db->error);
@@ -99,14 +99,14 @@
                                         ?>
                                     </span>
                                     <a href="inbox-read.php">
-                                        <i class="fa-solid fa-envelope-open"></i>
+                                        <i class="fa-solid fa-envelope-open activeMessage"></i>
                                     </a>
                                 </div>
                             </div>
                         </td>
                         <div>
                             <?php
-                                $query = "SELECT * FROM contactData WHERE status='unread'";
+                                $query = "SELECT * FROM contactData WHERE status='read'";
                                 $result = $db->query($query);
                                 ?>
                                 <?php if ($result->num_rows > 0): ?>
@@ -126,7 +126,7 @@
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLongTitle">Unread Messages</h5>
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">Client Message</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -144,15 +144,14 @@
                                                             Message: <?php echo htmlspecialchars($row['message']); ?>
                                                         </p>
                                                         <div id='<?php echo htmlspecialchars($row["id"]); ?>'>
-                                                            <a class="text-underline" href='mailto:<?php echo htmlspecialchars($row["email"]); ?>'>Send email</a>
-                                                            <br><br>
+                                                            <button class='btn btn-danger deleteMessage'>Delete</button>
                                                         </div>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                             <form action="inbox-markAsRead.php" method="POST">
                                                                 <input type="hidden" name="rowId" value="<?= $row['id']?>">
-                                                                <button type="submit" name="markReadBtn" class="btn btn-primary">Mark as read</button>
+                                                                <button type="submit" name="markUnreadBtn" class="btn btn-primary">Mark as unread</button>
                                                             </form>
                                                         </div>
                                                         </div>
@@ -175,5 +174,48 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script src="js/adminScript.js"></script>
+        <script>
+              // DElete messages
+        document.querySelectorAll('.deleteMessage').forEach(function(btn){
+            btn.addEventListener("click",function(e){
+            
+            if (confirm("Are you sure you want to delete this Message?")) {
+                const div = e.target.closest('div');
+                if (div) {
+                    const divId =div.id;
+                    const xhr = new XMLHttpRequest();
+                    xhr.open("POST", "deleteMessages.php", true);
+                    
+                    xhr.onload = function() {
+                        if (xhr.status >= 200 && xhr.status < 300) {
+                            // if(this.responseText == 1){
+                            //     Swal.fire("Deleted Successfully!");
+                            // }else{
+                            //     Swal.fire({
+                            //     icon: "error",
+                            //     text: "Something went wrong!",
+                            //     });
+                            // }
+                            location.reload(true);
+                        } else {
+                            console.error("Error deleting message: ", xhr.statusText);
+                        }
+                    };
+                    xhr.onerror = function() {
+                        console.error("Error deleting message: ", xhr.statusText);
+                    };
+                    const data = `id=${encodeURIComponent(divId)}`;
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.send(data);
+                } else {
+                    console.error("No div found");
+                }
+            } else {
+            
+            }
+            })
+        })
+
+        </script>
     </body>
 </html>

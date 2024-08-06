@@ -192,3 +192,38 @@ header{
 .btn-filter + div{
   position: absolute;
 }
+/* Messages Page */
+.message-icons{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.message-icons i{
+  font-size: 24px;
+  background-color: #fff;
+  padding: 10px 20px;
+}
+.activeMessage{
+  color: rgb(67, 67, 199);
+}
+.messageNotif-container{
+  position: relative;
+}
+.messageNotif-number{
+  position: absolute;
+  right: 10px;
+  font-weight: 800;
+}
+.text-underline{
+  text-decoration: underline;
+}
+.admin-box{
+  min-height: 300px;
+  height: max-content;
+}
+.admin-box .card-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
