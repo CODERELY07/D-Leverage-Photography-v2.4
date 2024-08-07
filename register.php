@@ -29,11 +29,12 @@ function registerUser($db, $username, $password) {
 }
 
 // Example usage
-$username = 'administrators';
-$password = '123456790';
+$username = 'admin';
+$password = 'dl3v3rag3';
 
 registerUser($db, $username, $password);
 
 // Close the dbection
 $db->close();
+header("location:adminLogin.php");
 ?>

@@ -7,21 +7,27 @@
     <section data-aos="fade-down" data-aos-duration="1000">
     <div class="text-center">
         <div class="about-text-center">
-        <h4>ABOUT US</h4>
-        <p class="text-center">
-            At D’Leverage Photography, our philosophy is to capture the
-            genuine essence of each moment, creating timeless and evocative
-            images that tell a unique story. With a rich blend of cultural
-            influences from the Philippines and Quebec, our approach
-            emphasizes empathy, connection, and artistic excellence.
-        </p>
-        <p class="text-center">
-            We specialize in wedding and portrait photography, ensuring every
-            shoot is personalized and reflective of our clients' visions. Our
-            commitment to authenticity and attention to detail sets us apart,
-            allowing us to create photographs that are not only visually
-            stunning but also deeply meaningful.
-        </p>
+        <h3>Our Story at Dleverage Photography</h3>
+        <article>
+            <p class="text-center">
+            Daniela Lomeda is a Montreal-based wedding and portrait photographer dedicated to capturing the essence of love and life’s special moments. Rooted in a rich Filipino heritage, Daniela's approach is warm and inviting, making her clients feel comfortable and cherished. Her passion for photography began at the age of 17, and since then, she has been committed to using her art to bring beauty and love to the forefront.
+            <br><br>
+            Dleverage Photography specializes in portraits, prenup shoots, elopements, intimate weddings, birthdays, and events. Whether in Montreal, QC, or anywhere else in the world, we strive to capture the genuine essence of each moment. Our God-centered approach ensures that every photo is crafted with love, empathy, and a deep sense of purpose.
+            <br><br>
+            Available worldwide, Dleverage Photography pioneers in building stories through their lens, creating lasting memories that are both beautiful and meaningful. Join us in celebrating life's most precious moments, one timeless image at a time.
+            </p>
+        </article>
+        <article>
+            <h5 class="mb-4">Expanding Our Vision: Join Our Team</h5>
+            
+            <p class="text-center">
+                As we continue to grow and touch lives with our artistry, we are excited to announce our plans to expand and create a dedicated team of passionate photographers and creatives. Our vision is to foster a collaborative environment where talent and innovation come together to produce extraordinary work. We seek individuals who share our commitment to capturing the beauty and love inherent in every moment and are eager to contribute to our mission with their unique perspectives and skills.
+                <br><br>
+                By joining Dleverage Photography, you will be part of a team that values creativity, empathy, and excellence. You will have the opportunity to work on diverse projects, travel to captivating locations, and be a part of a community that prioritizes both professional growth and personal fulfillment. Together, we will continue to pioneer in the field of photography, creating lasting memories that our clients will cherish forever.
+                <br><br>
+                If you are passionate about photography and dedicated to telling meaningful stories through your lens, we invite you to join us in this exciting journey. Let’s work together to make every moment timeless and every image a testament to the beauty and love we aim to capture.
+            </p>
+        </article>
         </div>
     </div>
     <div class="line"></div>

@@ -207,11 +207,12 @@ footer button{
     font-weight: 300;
     font-style: italic;
     margin-inline:auto;
-    width: 1000px;
-    max-width: 90%;
+    width: 1200px;
+    max-width: 95%;
 }
 .about-text-center p:nth-child(2){
-    width: 650px;
+    width: 1200px;
+    max-width: 90%;
 }
 .about-text-center p{
     font-weight: 300;
@@ -446,16 +447,20 @@ footer button{
     width: 800px;
     margin: 50px auto;
     cursor: pointer;
-    height: 250px;
+    border-radius: 4px;
+    height: 500px;
 }
 .album .card .cat{
     display: flex;
+    border-radius: 4px;
     justify-content: center;
     position: absolute;
     top: 0;
     align-items: center;
     max-width: inherit;
+    border-radius: 4px;
     height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
     width: 100%;
 }
 .album .card .card-bg{
@@ -464,21 +469,26 @@ footer button{
     left: 0;
     width: 100%;
     height: 100%;
+    border-radius: 4px;
+   
 }
 .album .card .card-bg img{
-    object-fit: cover;
+    object-fit: cover; 
     width: 100%;
+    border-radius: 4px;
     height: 100%;
     left: 0;
     position: absolute;
 }
 .album .card .cat h2{
     font-weight: 600;
-    color: #767676;
+    color: #e2e2e2;
 }
 .album .card hr{
-    background-color: #767676;
-    width: 240px;
+    background-color: #ffffff;
+    max-width: 240px;
+    color:white;
+    width: 80%;
     margin: 0 auto;
     display: block;
     margin-top: 160px;
@@ -673,6 +683,9 @@ footer button{
     .mobile-menu li:last-child::after{
         background-color: transparent;
     }
+    .album .card{
+        height: 350px;
+    }
 }
 @media only screen and (max-width:600px){
     p,
@@ -685,10 +698,16 @@ footer button{
     i{
         font-size: 18px !important;
     }
+    .album .card{
+        height: 300px;
+    }
 }
 @media only screen and (max-width:400px){
     .logo img {
         width: 100px;
         cursor: pointer;
+    }
+    .album .card{
+        height: 250px;
     }
 }

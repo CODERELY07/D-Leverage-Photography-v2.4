@@ -13,7 +13,7 @@
         <a class="card" href="photos-wedding.php">
             <div>
                 <div class="card-bg">
-                    <img src="image/static-img/banner.png" alt="">
+                    <img src="image/static-img/wedding.jpg" alt="">
                 </div>
                 <div class="cat">
                     <h2>WEDDING / PRENUPTIAL</h2>
@@ -24,7 +24,7 @@
         <a class="card" href="photos-birthday.php">
             <div>
                 <div class="card-bg">
-                    <img src="image/static-img/banner.png" alt="">
+                    <img src="image/static-img/birthday.JPG" alt="">
                 </div>
                 <div class="cat">
                     <h2>BIRTHDAY</h2>
@@ -35,7 +35,7 @@
         <a class="card" href="photos-others.php">
             <div>
                 <div class="card-bg">
-                    <img src="image/static-img/banner.png" alt="">
+                    <img src="image/static-img/others.jpg" alt="">
                 </div>
                 <div class="cat">
                     <h2>OTHERS</h2>

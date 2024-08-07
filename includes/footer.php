@@ -18,7 +18,10 @@
     </div>
     <div class="about">
         <h5>About</h5>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur quasi explicabo iure amet, ipsum dolores eos quam magni atque ea exercitationem, optio unde, ipsam repellat. Alias, et minima nihil esse est laboriosam suscipit facilis excepturi sed dolor ipsam praesentium delectus consequuntur vero, similique accusamus tempora natus veniam ut voluptates omnis.</p>
+        <p>Dleverage Photography <br><br>
+            A Filipino wedding, events, and portrait photographer. <br>
+            Based in Montreal, QC,<br>
+            and available worldwide.</p>
     </div>
     <div class="footer-contact">
         <p>For more Inquiry <br>Please contact us</p>

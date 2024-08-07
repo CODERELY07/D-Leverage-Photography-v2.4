@@ -8,9 +8,10 @@
 <main>
     <article>
     <div class="quotes text-center">
-        <p><b><i>"Photography is a way of feeling, of touching, of loving. What you have caught on film is captured forever... It remembers little things, long after you have forgotten everything." 
+        <p><b><i>“ I think your photos are beautiful! I’m
+        Very grateful for them! You are definitely talented!”
         </i></b></p>
-        <p><i>- Aaron Siskind</i></p>
+        <p><i>-  Michelle Newman</i></p>
     </div>
     <section data-aos="fade-right"
     data-aos-offset="300"
@@ -20,39 +21,12 @@
             <img src="image/static-img/img1.JPG"  alt="Model1">
             </div>
             <div class="text-holder">
-            <h5>Capturing Moments: A Visual Journey Through Life</h5>
-            <p>
-                Welcome to D’Leverage Photography
-            </p>
-            <p>At D’Leverage Photography, we specialize in capturing the essence of life's most precious moments through the lens of a camera. Whether it's your wedding day, a family reunion, a newborn's first smile, or simply the beauty of everyday life, we are passionate about creating timeless images that you will cherish forever.
+            <h2 class="mb-4">Welcome to Dleverage Photography</h2>
+            <p>At Dleverage Photography, we specialize in portraits, prenup shoots, elopements, intimate weddings, birthdays, and events. Based in Montreal, QC, and available worldwide, we strive to capture the genuine essence of each moment. Our God-centered approach ensures that every photo is crafted with love, empathy, and purpose.
             </p>
             <p>
-                Our approach is both artistic and documentary, aiming to tell your unique story through stunning photographs that evoke emotion and capture the authenticity of each moment. We believe in building a connection with our clients, understanding their vision, and delivering images that exceed expectations.
+                Pioneers in building stories through our lens, we create lasting memories that are both beautiful and meaningful. Join us in celebrating life's most precious moments, one timeless image at a time.
             </p>
-            </div>
-        </div>
-    </section>
-    <section data-aos="fade-right"
-    data-aos-offset="300"
-    data-aos-easing="ease-in-sine">
-        <h5 class="text-end my-5"><b><i>""Moments Captured, Memories Eternal: Our Photography Services"." 
-        </i></b></h5>
-        </div>
-        <div class="flex-50">
-        <div class="text-holder">
-            <p>Wedding Photography: From intimate ceremonies to grand celebrations, we specialize in capturing every heartfelt moment of your special day.</p>
-            <p>
-            Portrait Sessions: Whether it's family portraits, senior photos, or individual portraits, we create stunning images that showcase your unique personality and style.
-            </p>
-            <p>Event Coverage: Document the energy and excitement of your events with our professional photography services, ensuring every detail is captured beautifully.
-
-            </p>
-            <p>
-            Lifestyle Photography: Capture the essence of everyday life with our lifestyle photography sessions, creating images that reflect your passions and moments of joy.
-            </p>
-        </div>
-            <div class="img-holder img">
-            <img src="image/static-img/img2.JPG" alt="Model1">
             </div>
         </div>
     </section>
