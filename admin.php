@@ -1,4 +1,7 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
     require_once 'connection.php';
 
     session_start();
@@ -103,7 +106,7 @@
                        <h4 class=" text-center display-5 mb-3">New Messages</h4>
                        <p class="text-center">You have 
                        <?php 
-                            $sql = "SELECT * FROM contactdata WHERE status = 'unread'";
+                            $sql = "SELECT * FROM contactData WHERE status = 'unread'";
                             $result = $db->query($sql) or die("Query Failed " . $db->error);
 
                             if($result){

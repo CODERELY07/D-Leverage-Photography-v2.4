@@ -1,4 +1,6 @@
 <?php
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
     session_start();
 
     // Check if the user is logged in
@@ -69,7 +71,7 @@
                                 <div class="messageNotif-container">
                                     <span class="messageNotif-number activeMessage">
                                         <?php 
-                                            $sql = "SELECT * FROM contactdata WHERE status = 'unread'";
+                                            $sql = "SELECT * FROM contactData WHERE status = 'unread'";
                                             $result = $db->query($sql) or die("Query Failed " . $db->error);
 
                                             if($result){
@@ -87,7 +89,7 @@
                                 <div class="messageNotif-container">
                                     <span class="messageNotif-number">
                                         <?php 
-                                            $sql = "SELECT * FROM contactdata WHERE status = 'read'";
+                                            $sql = "SELECT * FROM contactData WHERE status = 'read'";
                                             $result = $db->query($sql) or die("Query Failed " . $db->error);
 
                                             if($result){

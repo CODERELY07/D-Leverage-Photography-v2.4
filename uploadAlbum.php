@@ -20,7 +20,7 @@
     $albumImg = htmlspecialchars($_FILES['upload-album']['name']);
     $albumCategory = htmlspecialchars($_POST['album-category']);
 
-        echo $albumName . $albumLink . $albumCategory;
+       
     // echo $albumName . $albumImg . $albumLink;
     $size = get_size($_FILES['upload-album']['size']);
     $path = 'image/upload-album';
