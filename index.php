@@ -3,7 +3,10 @@
     require_once 'includes/header.php';
 ?>
 <div class="banner-parent"  data-aos="fade-zoom-in">
-    <div class="banner"></div>
+    <!-- <img src="./image/static-img/banner.png" class="image-banner" alt=""> -->
+    <div class="banner">
+
+    </div>
 </div>
 <main>
     <article>
@@ -21,12 +24,12 @@
             <img src="image/static-img/img1.JPG"  alt="Model1">
             </div>
             <div class="text-holder">
-            <h2 class="mb-4">Welcome to Dleverage Photography</h2>
-            <p>At Dleverage Photography, we specialize in portraits, prenup shoots, elopements, intimate weddings, birthdays, and events. Based in Montreal, QC, and available worldwide, we strive to capture the genuine essence of each moment. Our God-centered approach ensures that every photo is crafted with love, empathy, and purpose.
-            </p>
-            <p>
-                Pioneers in building stories through our lens, we create lasting memories that are both beautiful and meaningful. Join us in celebrating life's most precious moments, one timeless image at a time.
-            </p>
+                <h2 class="mb-4">Welcome to Dleverage Photography</h2>
+                <p class="indent">At Dleverage Photography, we specialize in portraits, prenup shoots, elopements, intimate weddings, birthdays, and events. Based in Montreal, QC, and available worldwide, we strive to capture the genuine essence of each moment. Our God-centered approach ensures that every photo is crafted with love, empathy, and purpose.
+                </p>
+                <p class="indent">
+                    Pioneers in building stories through our lens, we create lasting memories that are both beautiful and meaningful. Join us in celebrating life's most precious moments, one timeless image at a time.
+                </p>
             </div>
         </div>
     </section>

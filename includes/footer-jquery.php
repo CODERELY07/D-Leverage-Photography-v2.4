@@ -1,34 +1,35 @@
-<footer>
-      <div class="footer-wrapper">
-        <div class="socials">
-          <a href="https://www.instagram.com/dleveragephoto" target="_blank">
-            <i class="fa-brands fa-instagram"></i>
+  <footer>
+      <div class="logo">
+          <a href="index.php"
+              >
+              <img src="image/static-img/logo.png" alt="D'Leverage Logo"
+              />
           </a>
-          <a href="https://www.facebook.com/dleveragephoto" target="_blank">
-            <i class="fa-brands fa-facebook"></i>
-          </a>
-        </div>
-        <div class="menu">
-            <ul>
-                <li class="mb-3"><h5>Menu</h5></li>
-                <li><a href="portfolio.php">Portfolio</a></li>
-                <li><a href="about.php">About</a></li>
-                <li><a href="photos.php">Photos</a></li>
-            </ul>
-        </div>
-        <div class="about">
-            <h5>About</h5>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur quasi explicabo iure amet, ipsum dolores eos quam magni atque ea exercitationem, optio unde, ipsam repellat. Alias, et minima nihil esse est laboriosam suscipit facilis excepturi sed dolor ipsam praesentium delectus consequuntur vero, similique accusamus tempora natus veniam ut voluptates omnis.</p>
-        </div>
-        <div class="footer-contact">
-            <p>For more Inquiry <br>Please contact us</p>
-            <a href="contact.php">
-              <button type="button">Contact</button>
-            </a>
-        </div>
       </div>
-      <p class="text-center text-white m-0 p-3">@2024 | ALL RIGHTS RESERVED | D’LEVERAGE</p>
-    </footer>
+      <div class="footer-wrapper">
+          <div>
+              
+              <h5>About</h5>
+              <p>Dleverage Photography <br><br>
+                  A Filipino wedding, events, and portrait photographer. <br>
+                  Based in Montreal, QC,<br>
+                  and available worldwide.</p>
+          </div>
+        
+          <div>
+              <h5>For more Inquiry </h5>
+              <p> Please contact us</p>
+              <a href="https://www.instagram.com/dleveragephoto" target="_blank">
+                  <i class="fa-brands fa-instagram"></i>
+              </a>
+              <a href="https://www.facebook.com/dleveragephoto" target="_blank">
+                  <i class="fa-brands fa-facebook"></i>
+              </a>
+            
+          </div>
+      </div>
+      <p class="text-center m-0 p-3">@2024 | ALL RIGHTS RESERVED | D’LEVERAGE</p>
+  </footer>
     <!-- bootrap -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

@@ -49,7 +49,7 @@
             </div>
         </header>
         <main class="container">
-            <h4 class="display-5 mt-5  mb-4">Your Clients Messages</h4>
+            <h4 class="mt-5  mb-4">Your Clients Messages</h4>
             <?php 
             if(isset($_SESSION['status']) && $_SESSION['status'] != ""){
                 ?>

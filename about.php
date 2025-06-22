@@ -2,9 +2,9 @@
     $title = "About | D'Leverage Photography";
     require_once 'includes/header.php';
 ?>
-<div style="margin-top: 200px"></div>
+<div style="padding-top:80px"></div>
 <article>
-    <section data-aos="fade-down" data-aos-duration="1000">
+    <section data-aos="fade-down" class="container" data-aos-duration="1000">
     <div class="text-center">
         <div class="about-text-center">
         <h3>Our Story at Dleverage Photography</h3>

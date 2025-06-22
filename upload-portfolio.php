@@ -43,8 +43,8 @@
             </div>
             </div>
         </header>
-        <main class="container">
-            <h4 class="display-5 mt-5  mb-4">Upload Portfolio Images</h4>
+        <main class="container pb-5">
+            <h4 class="mt-5  mb-4">Upload Portfolio Images</h4>
             <?php 
             if(isset($_SESSION['status']) && $_SESSION['status'] != ""){
                 ?>

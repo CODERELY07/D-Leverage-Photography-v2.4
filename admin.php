@@ -55,7 +55,7 @@ ini_set('display_errors', 1);
             <div class="col-md-4 mb-4">
                 <div class="card admin-box">
                     <div class="card-body">
-                       <h4 class=" text-center display-5 mb-3">Portfolio Images</h4>
+                       <h4 class=" text-center  mb-3">Portfolio Images</h4>
                        <p class="text-center">You have 
                        <?php 
                             $sql = "SELECT * FROM image";
@@ -79,7 +79,7 @@ ini_set('display_errors', 1);
             <div class="col-md-4 mb-4">
                 <div class="card admin-box">
                     <div class="card-body">
-                       <h4 class=" text-center display-5 mb-3">Album Images</h4>
+                       <h4 class=" text-center mb-3">Album Images</h4>
                        <p class="text-center">You have 
                        <?php 
                             $sql = "SELECT * FROM album";
@@ -103,7 +103,7 @@ ini_set('display_errors', 1);
             <div class="col-md-4 mb-4">
                 <div class="card admin-box">
                     <div class="card-body">
-                       <h4 class=" text-center display-5 mb-3">New Messages</h4>
+                       <h4 class=" text-center mb-3">New Messages</h4>
                        <p class="text-center">You have 
                        <?php 
                             $sql = "SELECT * FROM contactData WHERE status = 'unread'";

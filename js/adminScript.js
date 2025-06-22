@@ -3,6 +3,7 @@ const hideElements = document.querySelector('.hide');
 const user = document.getElementById('user');
 const filtered = document.getElementById('filtered');
 const filterHide = document.getElementById('filter-hide');
+
 window.addEventListener("click", () => {
     hideElem(filterHide)
     hideElem(hideElements)

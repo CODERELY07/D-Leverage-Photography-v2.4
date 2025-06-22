@@ -159,6 +159,9 @@ header{
   justify-content: space-between;
   align-items: center;
 }
+.flex-wrap{
+  flex-wrap: wrap;
+}
 .user-icon-con{
   height: 50px;
   position: relative;
@@ -218,8 +221,11 @@ header{
   text-decoration: underline;
 }
 .admin-box{
-  min-height: 300px;
+  min-height: 200px;
   height: max-content;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
 }
 .admin-box .card-body{
   display: flex;

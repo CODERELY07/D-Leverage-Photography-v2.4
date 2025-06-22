@@ -25,7 +25,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style.css?<?php echo time()?>" />
     <!-- Magnific pop up css-->
     <link
       rel="stylesheet"
@@ -34,7 +34,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <script defer src="js/script.js"></script>
+    <script defer src="js/script.js?<?php echo time()?>"></script>
   </head>
   <body class="grey">
     <div class="mobile-header fix">

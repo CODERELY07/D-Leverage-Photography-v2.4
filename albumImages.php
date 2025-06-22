@@ -45,7 +45,7 @@
             </div>
         </header>
         <main class="container">
-            <h4 class="display-5 mt-5  mb-4">Upload Album Images</h4>
+            <h4 class="mt-5  mb-4">Upload Album Images</h4>
             <?php 
             if(isset($_SESSION['status']) && $_SESSION['status'] != ""){
                 ?>
@@ -61,20 +61,21 @@
                 ?>
              <div class="card-body" style="overflow-x:hidden">
                 <form action="uploadAlbum.php"  accept="image/*" enctype="multipart/form-data" method="POST">
-                    <div class="inputFields  mt-2">
-                        <label for="album-name">Album Name</label>
-                        <input type="text" name="album-name" id="upload-name" class="form-control" required>
-                    </div>  
-                    <div class="inputFields  mt-2">
-                        <label for="album-category">Album Category</label>
-                        <select name="album-category" id="album-category" class="form-control">
-                            <option value="" selected></option>
-                            <option value="wedding">Wedding</option>
-                                <option value="birthday">Birthday</option>
-                                <option value="others">Others</option>
-                        </select>
-                    </div>  
-                    <div class="inputFields  mt-2">
+                    <div class="flex flex-wrap">
+                        <div class="inputFields  mt-2">
+                            <label for="album-name">Album Name</label>
+                            <input type="text" name="album-name" id="upload-name" class="form-control" required>
+                        </div>  
+                        <div class="inputFields  mt-2">
+                            <label for="album-category">Album Category</label>
+                            <select name="album-category" id="album-category" class="form-control">
+                                <option value="" selected></option>
+                                <option value="wedding">Wedding</option>
+                                    <option value="birthday">Birthday</option>
+                                    <option value="others">Others</option>
+                            </select>
+                        </div>  
+                          <div class="inputFields  mt-2">
                         <label for="album-link">Album Link</label>
                         <input type="text" name="album-link" id="upload-link" class="form-control" required>
                     </div>  
@@ -82,6 +83,9 @@
                         <label for="upload-album">Your Album Image</label>
                         <input type="file" accept="image/*" name="upload-album" id="upload-album" class="form-control" required>
                     </div>
+                    </div>
+                  
+                  
                     <input type="submit" name="albumSubmit" class="btn  mt-4 btn-primary" value="Submit">
                 </form>
             </div>
