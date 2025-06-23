@@ -118,6 +118,7 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script src="js/adminScript.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
         const filterList = document.getElementById('filter-list');
         const tableBody = document.querySelector('.image_table tbody');
@@ -149,10 +150,21 @@
                                 html += `
                                     <tr>
                                         <td style="display:none" class="img_id">${img.id}</td>
-                                        <td><img src="image/${img.filename}" alt="${img.filename}" width="100"></td>
+                                        <td>
+                                            <img src="image/${img.filename}" alt="${img.filename}" width="100" class="editable-image" 
+                                            data-id="${img.id}">
+                                            <input type="file" accept="image/*" class="d-none upload-input" data-id="${img.id}" />
+                                        </td>
                                         <td>${img.filename}</td>
-                                        <td>${img.category}</td>
+                                           <td>
+                                        <select class="form-control category-select" data-id="${img.id}">
+                                                <option value="wedding" ${img.category === 'wedding' ? 'selected' : ''}>Wedding/Prenuptial</option>
+                                                <option value="birthday" ${img.category === 'birthday' ? 'selected' : ''}>Birthday</option>
+                                                <option value="others" ${img.category === 'others' ? 'selected' : ''}>Others</option>
+                                            </select>
+                                        </td>
                                         <td><button class="btn btn-danger delete" data-filename="${img.filename}">Delete</button></td>
+                                     
                                     </tr>
                                 `;
                             });
@@ -167,6 +179,7 @@
             };
             xhr.send();
         }
+        
         fetchImages('all');
         tableBody.addEventListener('click', (event) => {
             if (event.target.classList.contains('delete')) {
@@ -202,6 +215,59 @@
 
             xhr.send(data);
         }   
+
+
+        // Open file input on image click
+            tableBody.addEventListener('click', function(e) {
+                if (e.target.classList.contains('editable-image')) {
+                    const id = e.target.getAttribute('data-id');
+                    const input = document.querySelector(`.upload-input[data-id="${id}"]`);
+                    input.click();
+                }
+            });
+
+            // Upload new image via AJAX
+            tableBody.addEventListener('change', function(e) {
+                if (e.target.classList.contains('upload-input')) {
+                    const id = e.target.getAttribute('data-id');
+                    const file = e.target.files[0];
+                    if (!file) return;
+
+                    const formData = new FormData();
+                    formData.append('new_image', file);
+                    formData.append('img_id', id);
+
+                    fetch('updateImage.php', {
+                        method: 'POST',
+                        body: formData
+                    }).then(res => res.text())
+                    .then(response => {
+                        console.log(response);
+                        fetchImages('all');
+                    }).catch(err => console.error(err));
+                }
+            });
+
+            // Change category via AJAX
+            tableBody.addEventListener('change', function(e) {
+                if (e.target.classList.contains('category-select')) {
+                    const id = e.target.getAttribute('data-id');
+                    const newCategory = e.target.value;
+
+                    const formData = new FormData();
+                    formData.append('img_id', id);
+                    formData.append('new_category', newCategory);
+
+                    fetch('updateCategory.php', {
+                        method: 'POST',
+                        body: formData
+                    }).then(res => res.text())
+                    .then(response => {
+                        console.log(response);
+                    }).catch(err => console.error(err));
+                }
+            });
+
         </script>
     </body>
 </html>

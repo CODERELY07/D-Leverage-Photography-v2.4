@@ -41,3 +41,12 @@ CREATE TABLE album(
     album_img VARCHAR(100) NOT NULL,
     album_category VARCHAR(100) NOT NULL
 )
+
+CREATE TABLE album_img (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    album_id INT NOT NULL,
+    img VARCHAR(100) NOT NULL,
+    FOREIGN KEY (album_id) REFERENCES album(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);

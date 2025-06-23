@@ -89,9 +89,11 @@
               </ul>
             </div> -->
           </li>
-          <li class="bg-dark text-white px-5 py-1 rounded">
-            <a href="contact.php">Book Now</a>
-          </li>
+          <a href="contact.php">
+            <li class="bg-dark text-white px-5 py-1 rounded">
+              Book Now
+            </li>
+          </a>
         </ul>
       </nav>
     </header>

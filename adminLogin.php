@@ -87,13 +87,21 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/admin.css">
+    <link rel="stylesheet" href="./css/style.css">
     <style>
         body{ font: 14px sans-serif; }
-        .wrapper{ width: 360px; padding:140px 20px; }
     </style>
 </head>
-<body>
-    <div class="wrapper container mt-5">
+<body class="bg-main">
+    <div class="wrapper mt-5">
+            <div>
+                <a href="index.php"
+                    >
+                    <img src="image/static-img/logo.png" width="100px"  alt="D'Leverage Logo"
+                    />
+                </a>
+            </div>
         <h2>Login</h2>
         <p>Hello!, Make sure you are the admin</p>
 

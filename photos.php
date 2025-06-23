@@ -9,7 +9,7 @@
         <h3>Photos</h3>
     </div>
     <div class="container album">
-        <a class="card" href="photos-wedding.php">
+        <a class="card" href="photos-category.php?category=wedding">
             <div>
                 <div class="card-bg">
                     <img src="image/static-img/wedding.jpg" alt="">
@@ -20,7 +20,7 @@
                 <hr>
             </div>
         </a>
-        <a class="card" href="photos-birthday.php">
+        <a class="card" href="photos-category.php?category=birthday">
             <div>
                 <div class="card-bg">
                     <img src="image/static-img/birthday.JPG" alt="">
@@ -31,7 +31,7 @@
                 <hr>
             </div>
         </a>
-        <a class="card" href="photos-others.php">
+      <a class="card" href="photos-category.php?category=others">
             <div>
                 <div class="card-bg">
                     <img src="image/static-img/others.jpg" alt="">
