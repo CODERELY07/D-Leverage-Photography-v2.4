@@ -73,32 +73,7 @@ header{
     overflow: hidden;
     transition: all .4s;
 }
-/* .mobile-nav-photo:hover{
-    height: 350px;
-} */
-/* mobile */
-/* .photos-type{
-    top: -300px;
-    background-color: var(--lighter-color);
-    transform: scale(0);
-    transition: top 0.4s ease, transform 0.1s ease;
-    position: absolute;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    line-height: 60px;
-}
-.photo:hover > .photos-type{
-    transform: scale(1);
-    top: 100px;
-}
-.photos-type ul li{
-    width: 100%;
-    padding: 8px 32px;
-    cursor: pointer;
-}
-.photos-type ul li:hover{
-    cursor: pointer;
-    background-color: var(--ligth-color);
-} */
+
 /* Mobile menu */
 .banner{
     background: url('../image/static-img/banner.png');
@@ -116,11 +91,6 @@ header{
     display: block;
     margin: 0 auto;
 }
-/* .banner-parent{
-    
-    background-color: var(--ligth-color);
-    height: max-content;
-} */
 /* main */
 main{
     width: 1200px;

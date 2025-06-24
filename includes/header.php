@@ -1,6 +1,5 @@
 <?php
      session_start();
-
      // Check if the user is logged in
      if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
       header('Location: admin.php');
@@ -14,7 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?= $title?></title>
     <link rel="icon" type="image/x-icon" href="image/static-img/logo2.png">
-    <!-- Aos -->
+    <base href="<?php echo rtrim((isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']), '/') . '/'; ?>">
+    <!-- Aos -->    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <!-- Bootstrap -->
     <link
@@ -35,6 +35,7 @@
     <!-- Sweetalert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>"/>
+    <script defer src="js/script.js?<?php echo time()?>"></script>
   </head>
   <body class="grey">
     <div class="mobile-header fix">
@@ -52,16 +53,6 @@
         <li><a href="about.php">About</a></li>
         <li class="mobile-nav-photo">
           <a href="photos.php">Photos</a>
-          <!-- <div class="mobile-photos-type">
-            <ul>
-              <li><a href="#">Wedding/Prenuptial Photos</a></li>
-              <li><a href="#">Birthday Photos
-</a></li>
-              <li><a href="#">Others</a></li>
-              <li><a href="photos.php">All Photos</a></li>
-              <li></li>
-            </ul>
-          </div> -->
         </li>
         <li class="bg-dark text-white px-5 py-1 rounded">
           <a href="contact.php">Book Now</a>
@@ -80,14 +71,6 @@
           </li>
           <li class="photo">
             <a href="photos.php">Photos</a>
-            <!-- <div class="photos-type">
-              <ul>
-                <li><a href="#">Wedding/Prenuptial Photos</a></li>
-                <li><a href="#">Birthday Photos
-</a></li>
-                <li><a href="#">Others</a></li>
-              </ul>
-            </div> -->
           </li>
           <a href="contact.php">
             <li class="bg-dark text-white px-5 py-1 rounded">

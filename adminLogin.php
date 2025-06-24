@@ -8,78 +8,11 @@
         exit();
     }
 
-    // Initialize variables
-    $username = $password = "";
-    $username_err = $password_err = $login_err = "";
+    $_SESSION['username_err'] = $_SESSION['username_err'] ?? '';
+    $_SESSION['password_err'] = $_SESSION['password_err'] ?? '';
+    $_SESSION['old_username'] = $_SESSION['old_username'] ?? '';
 
-    // Check if the request method is POST
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-        // Validate username
-        if (empty(trim($_POST["username"]))) {
-            $username_err = "Please enter username.";
-        } else {
-            $username = trim($_POST["username"]);
-        }
-
-        // Validate password
-        if (empty(trim($_POST["password"]))) {
-            $password_err = "Please enter your password.";
-        } else {
-            $password = trim($_POST["password"]);
-        }
-
-        // Check credentials
-        if (empty($username_err) && empty($password_err)) {
-
-            $sql = "SELECT id, username, password FROM admin WHERE username = ?";
-        
-            if ($stmt = $db->prepare($sql)) {
-                $stmt->bind_param("s", $param_username);
-                $param_username = $username;
-        
-                if ($stmt->execute()) {
-                    $stmt->store_result();
-        
-                    // Check if username exists
-                    if ($stmt->num_rows == 1) {
-                        // Bind result variables to allow fetching
-                        $stmt->bind_result($id, $username, $hashed_password);
-        
-                        if ($stmt->fetch()) {
-                            // After fetch(), the variables $id, $username, and $hashed_password
-                            //the id,username and hashed password is equal to the column id,username and password 
-                            if (password_verify($password, $hashed_password)) {
-                              
-                                session_start();
-                                $_SESSION["loggedin"] = true;
-                                $_SESSION["id"] = $id;
-                                $_SESSION["username"] = $username;
-        
-                                // Redirect to admin page
-                                header("Location: admin.php");
-                                exit();
-                            } else {
-                             
-                                $login_err = "Invalid username or password.";
-                            }
-                        }
-                    } else {
-                     
-                        $login_err = "Invalid username or password.";
-                    }
-                } else {
-                    echo "Oops! Something went wrong. Please try again later.";
-                }
-        
-                // Close statement
-                $stmt->close();
-            }
-        }
-        // Close connection
-        $db->close();
-    }
-?>
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -105,22 +38,22 @@
         <h2>Login</h2>
         <p>Hello!, Make sure you are the admin</p>
 
-        <?php 
-        if(!empty($login_err)){
-            echo '<div class="alert alert-danger">' . $login_err . '</div>';
-        }        
-        ?>
-
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <?php 
+            if(!empty($_SESSION['login_erro'])){
+                echo '<div class="alert alert-danger">' . $_SESSION['login_erro'] . '</div>';
+                unset($_SESSION['login_erro']);
+            }        
+            ?>
+        <form action="actions/login.php" method="post">
             <div class="form-group">
                 <label>Username</label>
-                <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
-                <span class="invalid-feedback"><?php echo $username_err; ?></span>
+                <input type="text" name="username" class="form-control <?php echo (!empty($_SESSION['username_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $_SESSION['old_username']; ?>">
+                <span class="invalid-feedback"><?php echo $_SESSION['username_err']; ?></span>
             </div>    
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
-                <span class="invalid-feedback"><?php echo $password_err; ?></span>
+                <input type="password" name="password" class="form-control <?php echo (!empty($_SESSION['password_err'])) ? 'is-invalid' : ''; ?>">
+                <span class="invalid-feedback"><?php echo $_SESSION['password_err']; ?></span>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Login">
@@ -129,3 +62,7 @@
     </div>
 </body>
 </html>
+<?php 
+    unset($_SESSION['username_err']);
+    unset($_SESSION['password_err']);
+?>

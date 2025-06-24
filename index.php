@@ -3,7 +3,6 @@
     require_once 'includes/header.php';
 ?>
 <div class="banner-parent"  data-aos="fade-zoom-in">
-    <!-- <img src="./image/static-img/banner.png" class="image-banner" alt=""> -->
     <div class="banner">
 
     </div>
