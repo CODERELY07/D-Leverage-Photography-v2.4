@@ -53,5 +53,5 @@
     <script>
       AOS.init();
     </script>
-  </body>
+</body>
 </html>

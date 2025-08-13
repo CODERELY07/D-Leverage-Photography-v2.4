@@ -22,26 +22,4 @@
     <base href="<?php echo rtrim((isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']), '/') . '/'; ?>">
   </head>
   <body>
-    <header>
-        <div class="container">
-           <div class="flex">
-                <div class="logo">
-                <a href="admin.php">
-                        <img src="image/static-img/logo.png" width="150px" alt="D'Leverage Logo"
-                    />
-                    </a></div>
-                <div class="user-icon-con">
-                   <div class="user-icon" id="user">
-                    <i class="fa-solid fa-user" ></i>
-                   </div>
-                   
-                    <div class="hide dropdown absolute card">
-                        <a href="upload-portfolio.php">Portfolio Images</a><br>
-                        <a href="albumImages.php">Album Images</a><br>
-                        <a href="inbox.php">Inbox</a><br>
-                        <a href="logout.php">Logout</a>
-                    </div>
-                </div>
-           </div>
-        </div>
-    </header>
+    

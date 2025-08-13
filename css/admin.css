@@ -34,8 +34,8 @@ ul li:hover{
 }
 .absolute{
   position: absolute;
-  bottom:-100px;
-  left:-150px;
+  bottom:-130px;
+  left:-130px;
 }
 header{
   box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
@@ -111,6 +111,7 @@ header{
   min-height: 200px;
   height: max-content;
   width: 100%;
+  padding: 0 !important;
   max-width: 300px;
   margin: 0 auto;
 }

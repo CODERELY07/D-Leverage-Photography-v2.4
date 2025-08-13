@@ -32,11 +32,11 @@ $(document).ready(function () {
         }
         // Update Magnific Popup with filtered images
         $(".gallery").magnificPopup({
-        delegate: "a." + filter,
-        type: "image",
-        gallery: {
-            enabled: true,
-        },
+            delegate: "a." + filter,
+            type: "image",
+            gallery: {
+                enabled: true,
+            },
         });
     });
 });

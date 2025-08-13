@@ -19,30 +19,8 @@
     <link rel="stylesheet" href="css/admin.css?v=<?php echo time(); ?>">
   </head>
   <body>
-        <header>
-            <div class="container">
-            <div class="flex">
-                <div class="logo">
-                    <a href="admin.php">
-                        <img src="image/static-img/logo.png" width="150px" alt="D'Leverage Logo"
-                    />
-                    </a>
-                   </div>
-                <div class="user-icon-con">
-                <div class="user-icon" id="user">
-                    <i class="fa-solid fa-user" ></i>
-                </div>
-                
-                    <div class="hide dropdown absolute card">
-                        <a href="upload-portfolio.php">Portfolio Images</a><br>
-                        <a href="albumImages.php">Album Images</a><br>
-                        <a href="inbox.php">Inbox</a><br>
-                        <a href="logout.php">Logout</a>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </header>
+       <?php require_once 'includes/admin-header.php';?>
+
         <main class="container pb-5">
             <h4 class="mt-5  mb-4">Upload Portfolio Images</h4>
             <?php 
@@ -117,7 +95,7 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-        <script src="js/adminScript.js"></script>
+       
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
         const filterList = document.getElementById('filter-list');
@@ -269,5 +247,6 @@
             });
 
         </script>
+         <script src="js/adminScript.js?<?php echo time()?>"></script>
     </body>
 </html>

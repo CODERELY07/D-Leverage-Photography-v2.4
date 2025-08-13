@@ -35,7 +35,7 @@
     <!-- Sweetalert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>"/>
-    <script defer src="js/script.js?<?php echo time()?>"></script>
+    <!-- <script defer src="js/script.js?<?php echo time()?>"></script> -->
   </head>
   <body class="grey">
     <div class="mobile-header fix">

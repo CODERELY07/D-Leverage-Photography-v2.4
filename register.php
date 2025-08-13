@@ -26,13 +26,13 @@ function registerUser($db, $username, $password) {
     $stmt->close();
 }
 
-// Example usage
-$username = 'admin';
-$password = 'dl3v3rag3';
 
-registerUser($db, $username, $password);
+    $username = 'admin';
+    $password = 'dl3v3rag3';
 
-// Close the dbection
-$db->close();
-header("location:adminLogin.php");
+    registerUser($db, $username, $password);
+
+
+    $db->close();
+    header("location:adminLogin.php");
 ?>

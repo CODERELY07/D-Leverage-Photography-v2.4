@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
 });
 
+if(location.pathname === '/D-Leverage-Photography-v2.4/albumImages.php'){
     $('#uploadForm').submit(function(e) {
     e.preventDefault();
 
@@ -37,6 +38,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
 });
 
+}
+
 window.addEventListener("click", () => {
     hideElem(filterHide)
     hideElem(hideElements)
@@ -45,10 +48,13 @@ user.addEventListener("click", (e) => {
     e.stopPropagation();
     toggleElem(hideElements); 
 });
-filtered.addEventListener("click", (e) => {
-    e.stopPropagation();
-    toggleElem(filterHide); 
-});
+if(location.pathname == "/D-Leverage-Photography-v2.4/upload-portfolio.php"){
+    filtered.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleElem(filterHide); 
+    });
+}
+
 
 function hideElem(element){
     element.classList.remove('active');

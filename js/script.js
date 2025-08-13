@@ -1,11 +1,12 @@
-const header = document.querySelectorAll(".fix");
+const headers = document.querySelectorAll(".fix");
+
 window.addEventListener("scroll", () => {
   if (window.scrollY < 0 || window.scrollY == 0) {
-    header.forEach((fix) => {
+    headers.forEach((fix) => {
       fix.classList.remove("change");
     });
   } else {
-    header.forEach((fix) => {
+    headers.forEach((fix) => {
       fix.classList.add("change");
     });
   }
@@ -46,55 +47,59 @@ loading.forEach((div) => {
 
 const contactForm = document.getElementById("contactForm");
 
-contactForm.addEventListener("submit", function (e) {
-  e.preventDefault();
-  let formData = new FormData(this);
-  /*Testing purpose */
-  // let formObject = {};
-  // formData.forEach((key,value)=>{
-  //    formObject[key] = value;
-  // })
+if(location.pathname == "/D-Leverage-Photography-v2.4/contact.php"){
+    contactForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    let formData = new FormData(this);
+    /*Testing purpose */
+    // let formObject = {};
+    // formData.forEach((key,value)=>{
+    //    formObject[key] = value;
+    // })
 
-  // console.log(formObject);
-  formData.append("send", document.getElementById("send").name);
-  let xhr = new XMLHttpRequest();
-  xhr.open("Post", "contactSubmit.php");
+    // console.log(formObject);
+    formData.append("send", document.getElementById("send").name);
+    let xhr = new XMLHttpRequest();
+    xhr.open("Post", "contactSubmit.php");
 
-  xhr.onload = function () {
-    if (xhr.status >= 200 && xhr.status < 300) {
-      if (this.responseText == 0) {
-        Swal.fire({
-          icon: "error",
-          title: "All Data is required",
-          text: "Please Input your data!",
-        });
-      } else if (this.responseText == -1) {
-        Swal.fire({
-          icon: "Error",
-          title: "Input Error",
-          text: "Please provide correct email!",
-        });
-      } else if (this.responseText == -2) {
-        Swal.fire({
-          icon: "Error",
-          title: "Already Book!",
-          text: "You're Already Send a messgae, Please wait a minute for the response",
-        });
-        contactForm.reset();
+    xhr.onload = function () {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        if (this.responseText == 0) {
+          Swal.fire({
+            icon: "error",
+            title: "All Data is required",
+            text: "Please Input your data!",
+          });
+        } else if (this.responseText == -1) {
+          Swal.fire({
+            icon: "Error",
+            title: "Input Error",
+            text: "Please provide correct email!",
+          });
+        } else if (this.responseText == -2) {
+          Swal.fire({
+            icon: "Error",
+            title: "Already Book!",
+            text: "You're Already Send a messgae, Please wait a minute for the response",
+          });
+          contactForm.reset();
+        } else {
+          Swal.fire(
+            "Your Form is Submitted Succesfully!Check your email after a minutes"
+          );
+          contactForm.reset();
+        }
       } else {
-        Swal.fire(
-          "Your Form is Submitted Succesfully!Check your email after a minutes"
-        );
-        contactForm.reset();
+        console.log("Error:", xhr.statusText);
       }
-    } else {
-      console.log("Error:", xhr.statusText);
-    }
-  };
-  xhr.onerror = function () {
-    console.error("Request failed");
-  };
+    };
+    xhr.onerror = function () {
+      console.error("Request failed");
+    };
 
-  xhr.send(formData);
-});
+    xhr.send(formData);
+  });
  
+}
+
+

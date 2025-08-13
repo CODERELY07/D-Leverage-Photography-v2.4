@@ -77,7 +77,6 @@ header{
 /* Mobile menu */
 .banner{
     background: url('../image/static-img/banner.png');
-    /* mix-blend-mode: color-burn; */
     height: 80vh !important;
     width: 100% !important;
     background-size: cover !important;
@@ -170,7 +169,6 @@ section{
 footer{
     margin-top: 80px;
     padding: 10px 30px;
-    box-shadow: 2px 4px 8px rgba(0,0,0,0.9);
     background-color: #fff;
 }
 footer i{

@@ -1,7 +1,7 @@
 
 document.querySelectorAll('.delete-form').forEach(form => {
     form.addEventListener('submit', function (e) {
-        e.preventDefault(); // Stop the form from submitting
+        e.preventDefault(); 
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",

@@ -4,7 +4,7 @@
 ?>
 <div class="banner-parent"  data-aos="fade-zoom-in">
     <div class="banner">
-
+        
     </div>
 </div>
 <main>

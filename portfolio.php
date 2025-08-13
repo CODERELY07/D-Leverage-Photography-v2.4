@@ -14,7 +14,7 @@
 
             while($data = $result->fetch_assoc()):
             ?>
-            <li class="buttons" data-filter="<?php echo $data['category'];?>"><?php echo $data['category']; ?> Photos</li>
+              <li class="buttons" data-filter="<?php echo $data['category'];?>"><?php echo $data['category']; ?> Photos</li>
             <?php
               endwhile;
             ?>
@@ -26,9 +26,9 @@
 
             while($data = $result->fetch_assoc()):
           ?>
-          <a href="./image/<?php echo $data['filename']; ?>" class="image <?php echo $data['category']; ?> img">
-            <img src="./image/<?php echo $data['filename']; ?>" alt="<?php echo $data['filename']; ?>">
-          </a>
+            <a href="./image/<?php echo $data['filename']; ?>" class="image <?php echo $data['category']; ?> img">
+              <img src="./image/<?php echo $data['filename']; ?>" alt="<?php echo $data['filename']; ?>">
+            </a>
           <?php
             endwhile;
           ?>
