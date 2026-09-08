@@ -1,225 +1,877 @@
+/* ============================================================
+   D'Leverage Admin — design system
+   Shares the public site's ink/gold palette so the admin feels
+   like part of the same product, not a stock Bootstrap theme.
+   ============================================================ */
+:root{
+  --ink: #17170f;
+  --ink-soft: #5a5a4f;
+  --ink-faint: #928f80;
+  --paper: #faf9f5;
+  --surface: #ffffff;
+  --surface-alt: #f1efe7;
+  --line: #e6e2d6;
+  --gold: #a9822f;
+  --gold-dark: #8a6a24;
+  --gold-deep: #6e5320;
+  --gold-soft: #f3ead2;
+  --danger: #c0392b;
+  --danger-soft: #fbe9e7;
+  --success: #2f7a4f;
+  --success-soft: #e7f3ec;
+  --info: #2f6690;
+  --info-soft: #e8f1f7;
 
-/* reset */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --shadow-xs: 0 1px 2px rgba(23,23,15,.05);
+  --shadow-sm: 0 6px 16px -10px rgba(23,23,15,.18), 0 2px 5px -2px rgba(23,23,15,.08);
+  --shadow-md: 0 20px 40px -18px rgba(23,23,15,.28), 0 4px 10px -4px rgba(23,23,15,.10);
+  --shadow-lg: 0 30px 60px -20px rgba(23,23,15,.32);
+  --ease: cubic-bezier(.4,0,.2,1);
+  --logo-h: 34px;
+}
+
+/* ============================================================
+   RESET / BASE
+   ============================================================ */
 *{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-
+body{
+  background:
+    radial-gradient(1100px 520px at 12% -8%, rgba(169,130,47,.09), transparent 60%),
+    radial-gradient(900px 480px at 108% 10%, rgba(47,106,144,.06), transparent 55%),
+    var(--paper);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+h1,h2,h3,h4,h5,h6{
+  color: var(--ink);
+  font-weight: 600;
+}
+.page-heading{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1.4rem;
+  margin-bottom: 2.2rem;
+  border-bottom: 1px solid var(--line);
+}
+.page-heading .eyebrow{
+  display: block;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  margin-bottom: .3rem;
+}
 a{
-  color: #131313;
+  color: var(--ink);
   text-decoration: none;
 }
 ul{
   list-style: none;
 }
-ul li,
-.card,
-.user-icon,
-i{
-  cursor: pointer;
+img{
+  max-width: 100%;
 }
-a:hover,
-ul li:hover{
-  text-decoration: underline;
+:focus-visible{
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
-.hide,
-#filter-hide{
-  display:none;
-  z-index: 10;
+.text-muted{
+  color: var(--ink-faint) !important;
 }
-.active,
-#filter-hide.active{
+
+/* ============================================================
+   TOPBAR
+   ============================================================ */
+header.admin-topbar{
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 8px 24px -18px rgba(23,23,15,.35);
+  padding: .7rem 0;
+  position: relative;
+  z-index: 60;
+}
+.admin-topbar .logo img{
+  height: var(--logo-h);
+  width: auto;
   display: block;
 }
-.absolute{
-  position: absolute;
-  bottom:-130px;
-  left:-130px;
+.admin-topbar .brand-name{
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 600;
+  letter-spacing: .04em;
+  font-size: 1.05rem;
+  color: var(--ink);
 }
-header{
-  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
-}
-.flex{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.flex-wrap{
-  flex-wrap: wrap;
-}
+
+/* user avatar + dropdown */
 .user-icon-con{
-  height: 50px;
   position: relative;
 }
 .user-icon{
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
-  width: 50px;
-  place-items: center;
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
   display: grid;
-  color: rgb(87, 80, 80);
-  height: 50px;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-xs);
+  transition: background-color .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.user-icon:hover{
+  background: var(--gold-soft);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
 }
 .user-icon i{
-  font-size: 24px;
+  font-size: 1.05rem;
+  color: var(--ink-soft);
 }
-.dropdown{
-  padding: 10px 20px;
-  width: max-content;
-}
-.formInput{
-  width: 100%;
-  padding: 0px;
-}
-.btn-filter{
-  border: 1px solid black;
-  padding: 5px 20px;
-  background-color: #fff;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-.btn-filter + div{
+.admin-dropdown{
+  display: none;
   position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  width: 220px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: .4rem;
+  z-index: 50;
 }
-/* Messages Page */
-.message-icons{
+.admin-dropdown.active{
+  display: block;
+}
+.admin-dropdown a{
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: .65rem;
+  padding: .55rem .6rem;
+  border-radius: var(--radius-sm);
+  font-size: .9rem;
+  color: var(--ink);
+  transition: background-color .2s var(--ease);
 }
-.message-icons i{
-  font-size: 24px;
-  background-color: #fff;
-  padding: 10px 20px;
+.admin-dropdown a:hover{
+  background: var(--surface-alt);
 }
-.activeMessage{
-  color: rgb(67, 67, 199);
+.admin-dropdown a i{
+  width: 18px;
+  text-align: center;
+  color: var(--gold-dark);
 }
-.messageNotif-container{
+.admin-dropdown a.text-danger i,
+.admin-dropdown a.text-danger{
+  color: var(--danger) !important;
+}
+.admin-dropdown hr{
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: .35rem .2rem;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{
+  border-radius: 999px;
+  font-weight: 500;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), background-color .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
+}
+.btn:focus{
+  box-shadow: none;
+}
+.btn-primary{
+  background: linear-gradient(180deg, #232319, var(--ink));
+  border-color: var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+.btn-primary:hover,
+.btn-primary:focus{
+  background: linear-gradient(180deg, #2c2c1f, #000);
+  border-color: #000;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.btn-gold{
+  /* Both gradient stops stay dark enough for white text to clear WCAG AA (4.5:1) */
+  background: linear-gradient(180deg, var(--gold-dark), var(--gold-deep));
+  border-color: var(--gold-dark);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.btn-gold:hover{
+  background: linear-gradient(180deg, var(--gold-deep), #573f16);
+  border-color: var(--gold-deep);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.btn-outline-secondary{
+  color: var(--ink-soft);
+  border-color: var(--line);
+  background: var(--surface);
+}
+.btn-outline-secondary:hover{
+  background-color: var(--surface-alt);
+  color: var(--ink);
+  border-color: var(--line);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+.btn-danger{
+  background: linear-gradient(180deg, #cd4230, var(--danger));
+  border-color: var(--danger);
+  box-shadow: var(--shadow-sm);
+}
+.btn-danger:hover{
+  background: linear-gradient(180deg, var(--danger), #9c2e1f);
+  border-color: #a5321f;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Icon-only action buttons (table rows, cards) */
+.icon-btn{
+  --icon-btn-color: var(--ink-soft);
+  --icon-btn-bg: var(--surface);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--icon-btn-bg);
+  color: var(--icon-btn-color);
+  font-size: .9rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-xs);
+  transition: transform .2s var(--ease), box-shadow .2s var(--ease), background-color .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+}
+.icon-btn:hover,
+.icon-btn:focus-visible{
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  color: #fff;
+}
+.icon-btn.icon-view:hover{ background: var(--info); border-color: var(--info); }
+.icon-btn.icon-edit:hover{ background: var(--gold); border-color: var(--gold); }
+.icon-btn.icon-danger:hover{ background: var(--danger); border-color: var(--danger); }
+.icon-btn.icon-success:hover{ background: var(--success); border-color: var(--success); }
+.icon-btn:disabled{
+  opacity: .5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+.icon-btn-group{
+  display: inline-flex;
+  gap: .4rem;
+}
+
+/* Lightweight CSS tooltip for icon buttons: <button data-tooltip="Delete"> */
+[data-tooltip]{
   position: relative;
 }
-.messageNotif-number{
+[data-tooltip]::after{
+  content: attr(data-tooltip);
   position: absolute;
-  right: 10px;
-  font-weight: 800;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--ink);
+  color: #fff;
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  padding: .3rem .6rem;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s var(--ease), transform .2s var(--ease);
+  z-index: 40;
 }
-.text-underline{
-  text-decoration: underline;
+[data-tooltip]:hover::after,
+[data-tooltip]:focus-visible::after{
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.card{
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-xs);
+}
+.card.shadow-sm{
+  box-shadow: var(--shadow-sm) !important;
+}
+/* The whole dashboard box is the click target; the card inside is purely visual */
+.admin-box-link{
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+.admin-box-link:focus-visible{
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: var(--radius-md);
 }
 .admin-box{
-  min-height: 200px;
+  position: relative;
+  min-height: 150px;
   height: max-content;
   width: 100%;
   padding: 0 !important;
-  max-width: 300px;
-  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm) !important;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
 }
+/* Read by both the icon badge and (on hover) the card border */
+.admin-box:has(.stat-icon.gold){ --card-accent: var(--gold); }
+.admin-box:has(.stat-icon.success){ --card-accent: var(--success); }
+.admin-box:has(.stat-icon.warning){ --card-accent: #c99a2e; }
+.admin-box:hover{
+  transform: translateY(-4px);
+  border-color: var(--card-accent, var(--line));
+  box-shadow: var(--shadow-md) !important;
+}
+/* Bento-tile layout: small icon badge, label block, then a big number — all left-aligned */
 .admin-box .card-body{
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: flex-start;
+  gap: .3rem;
+  padding: 1.5rem;
+}
+.admin-box .stat-icon{
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 1.05rem;
+  margin-bottom: .6rem;
+}
+.admin-box .stat-icon.gold{ background: var(--gold-soft); color: var(--gold-dark); }
+.admin-box .stat-icon.success{ background: var(--success-soft); color: var(--success); }
+.admin-box .stat-icon.warning{ background: #fbf1de; color: #a2761f; }
+.admin-box-text h4{
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: .15rem;
+}
+.admin-box-text .text-muted{
+  font-size: .8rem;
+  margin: 0;
+}
+.admin-box-count{
+  font-family: "Poppins", sans-serif;
+  font-size: 2.75rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ink);
+  margin: .5rem 0 0;
+}
+
+/* ============================================================
+   FORMS
+   ============================================================ */
+.form-control,
+select.form-control{
+  border-color: var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+}
+.form-control:focus{
+  border-color: var(--gold);
+  outline: 0;
+  box-shadow: 0 0 0 .2rem rgba(169,130,47,.18);
+}
+.form-group label,
+label{
+  font-weight: 500;
+  color: var(--ink-soft);
+  font-size: .88rem;
+}
+/* Bootstrap 4 form helpers kept for markup compatibility (BS5 dropped them) */
+.form-row{
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -.5rem;
+  margin-left: -.5rem;
+}
+.form-row > [class*="col-"]{
+  padding-right: .5rem;
+  padding-left: .5rem;
+}
+.form-group{
+  margin-bottom: 1rem;
+}
+
+/* Filter dropdown (upload-portfolio.php) */
+.btn-filter{
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: .45rem 1.1rem;
+  background-color: var(--surface);
+  font-weight: 600;
+  font-size: .85rem;
+  color: var(--ink-soft);
+  transition: border-color .2s var(--ease), color .2s var(--ease);
+}
+.btn-filter:hover{
+  border-color: var(--gold);
+  color: var(--gold-dark);
+}
+/* Anchor the dropdown to its trigger, same pattern as .admin-dropdown above,
+   instead of relying on document-flow position (which let it overflow the
+   viewport and force a horizontal scrollbar whenever the button sat near
+   the right edge of the page). */
+.hidden-parent.filter{
+  position: relative;
+}
+#filter-hide{
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  width: 220px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: .4rem;
+  z-index: 20;
+}
+#filter-hide.active{
+  display: block;
+}
+#filter-hide li{
+  padding: .5rem .6rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: .88rem;
+  transition: background-color .2s var(--ease);
+}
+#filter-hide li:hover{
+  background: var(--surface-alt);
+}
+#filter-hide li.active{
+  background: var(--gold-soft);
+  color: var(--gold-dark);
+  font-weight: 600;
+}
+
+/* ============================================================
+   SECTION HEADERS (icon chip + title, used atop cards/forms)
+   ============================================================ */
+.icon-chip{
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  display: grid;
+  place-items: center;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-xs);
+}
+.icon-chip.gold{ background: linear-gradient(155deg, var(--gold-soft), #ecdcb4); color: var(--gold-dark); }
+.icon-chip.info{ background: linear-gradient(155deg, var(--info-soft), #cfe3f0); color: var(--info); }
+.icon-chip.success{ background: linear-gradient(155deg, var(--success-soft), #d4ecdf); color: var(--success); }
+.section-head{
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  margin-bottom: 1.4rem;
+}
+.section-head .section-sub{
+  font-size: .8rem;
+  color: var(--ink-faint);
+  margin-top: .1rem;
+}
+
+/* Primary page actions: icon-only, label revealed on hover/focus via [data-tooltip] */
+.album-actions{
+  display: flex;
+  gap: .6rem;
+}
+.action-fab{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  display: grid;
+  place-items: center;
+  font-size: 1.15rem;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), background-color .25s var(--ease);
+}
+.action-fab:hover,
+.action-fab:focus-visible{
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.action-fab.gold{
+  background: linear-gradient(180deg, var(--gold-dark), var(--gold-deep));
+}
+.action-fab.gold:hover{
+  background: linear-gradient(180deg, var(--gold-deep), #573f16);
+}
+.action-fab.info{
+  background: linear-gradient(180deg, #3a7ba8, var(--info));
+}
+.action-fab.info:hover{
+  background: linear-gradient(180deg, var(--info), #204a68);
+}
+
+/* ============================================================
+   TABLES
+   ============================================================ */
+/* Bleed distance matches Bootstrap's actual --bs-card-spacer-*: 1rem, not
+   1.25rem — the old mismatch overshot the card's edge by 4px per side,
+   so the table visually poked outside the card's rounded border. */
+.card > .card-body > .table-responsive,
+.card > .table-responsive{
+  margin: 0 -1rem -1rem;
+  width: calc(100% + 2rem);
+}
+/* Only bleed into the top edge too when the table is the card's first
+   element — otherwise it collides with a title/toolbar sitting above it */
+.card > .card-body > .table-responsive:first-child,
+.card > .table-responsive:first-child{
+  margin-top: -1rem;
+}
+.table{
+  color: var(--ink);
+  vertical-align: middle;
+  margin-bottom: 0;
+}
+.table thead th,
+.table thead td{
+  border-bottom: 2px solid var(--line);
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-size: .72rem;
+  font-weight: 600;
+  background: var(--surface);
+  padding-top: .9rem;
+  padding-bottom: .9rem;
+}
+.table thead tr :first-child{ border-top-left-radius: var(--radius-md); }
+.table thead tr :last-child{ border-top-right-radius: var(--radius-md); }
+.table td,
+.table th{
+  border-color: var(--line);
+  padding-top: .85rem;
+  padding-bottom: .85rem;
+}
+.table-hover tbody tr{
+  transition: background-color .2s var(--ease);
+}
+.table-hover tbody tr:hover{
+  background-color: var(--surface-alt);
+}
+.table img.img-thumbnail,
+.table img.editable-image{
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  object-fit: cover;
+  height: 64px;
+  width: 64px;
+  cursor: pointer;
+}
+/* Row currently loaded into an edit form above the table */
+tr.row-editing td{
+  background: var(--gold-soft) !important;
+}
+
+/* Table card header: title + count on the left, search on the right */
+.table-toolbar{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+}
+.table-search{
+  position: relative;
+  width: 100%;
+  max-width: 260px;
+}
+.table-search i{
+  position: absolute;
+  left: .85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink-faint);
+  font-size: .82rem;
+  pointer-events: none;
+}
+.table-search input{
+  padding-left: 2.25rem;
+}
+
+/* Category pill shown under an album's name */
+.category-badge{
+  display: inline-flex;
+  align-items: center;
+  padding: .25rem .65rem;
+  border-radius: 999px;
+  font-size: .68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  white-space: nowrap;
+}
+.category-badge.wedding{ background: var(--gold-soft); color: var(--gold-dark); }
+.category-badge.birthday{ background: var(--success-soft); color: var(--success); }
+.category-badge.others{ background: var(--surface-alt); color: var(--ink-soft); }
+
+/* Compact external-link pill (replaces raw, layout-breaking URLs in tables) */
+.link-chip{
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  max-width: 220px;
+  padding: .35rem .75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-size: .82rem;
+  color: var(--ink-soft);
+  transition: border-color .2s var(--ease), color .2s var(--ease);
+}
+.link-chip span{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.link-chip i{
+  font-size: .7rem;
+  flex-shrink: 0;
+}
+.link-chip:hover{
+  border-color: var(--gold);
+  color: var(--gold-dark);
+}
+
+/* ============================================================
+   BADGES
+   ============================================================ */
+.badge{
+  font-weight: 600;
+}
+.badge.bg-danger{ background-color: var(--danger) !important; }
+/* ink-faint and gold aren't dark enough for white badge text (WCAG AA);
+   dark ink text clears 4.5:1 on both, danger stays white since it already does */
+.badge.bg-secondary{ background-color: var(--ink-faint) !important; color: var(--ink) !important; }
+.badge.bg-primary{ background-color: var(--gold) !important; color: var(--ink) !important; }
+
+/* ============================================================
+   MESSAGES / INBOX
+   ============================================================ */
+.messageNotif-container a{
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  color: var(--ink-soft);
+  font-size: .88rem;
+  font-weight: 500;
+}
+.messageNotif-container a:hover{
+  color: var(--gold-dark);
+}
+
+/* ============================================================
+   LOGIN
+   ============================================================ */
+.bg-main{
+  background: linear-gradient(180deg, var(--paper) 0%, var(--surface-alt) 100%);
+  min-height: 100vh;
+  display: flex;
   align-items: center;
 }
-
-/* logini */
-.bg-main{
-      background-color: #f8f9fa;
+.wrapper{
+  position: relative;
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.6rem 2rem 2.2rem;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--line);
+  overflow: hidden;
 }
-.wrapper {
-    max-width: 450px;
-    margin: 0px auto;
-    padding: 0 20px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.wrapper::before{
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-soft), var(--gold));
+}
+.wrapper .logo-link{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.4rem;
+}
+.wrapper .logo-link img{
+  height: 40px;
+  width: auto;
+}
+.wrapper h2{
+  text-align: center;
+  margin-bottom: .4rem;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.8rem;
+}
+.wrapper p{
+  text-align: center;
+  margin-bottom: 1.6rem;
+  color: var(--ink-faint);
+  font-size: .88rem;
+}
+.wrapper .btn-primary{
+  width: 100%;
+  padding: .7rem;
 }
 
-.wrapper h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #343a40;
+.alert{
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  font-size: .88rem;
+}
+.alert-danger{
+  color: #7c2d20;
+  background-color: var(--danger-soft);
+  border-color: #f2c9c1;
+}
+.alert-warning{
+  color: #7a5b12;
+  background-color: var(--gold-soft);
+  border-color: #e8d9ae;
+}
+.alert-success{
+  color: #1e5c3a;
+  background-color: var(--success-soft);
+  border-color: #bfe3cf;
+}
+.field-hint{
+  display: block;
+  font-size: .78rem;
+  color: var(--ink-faint);
+  margin-top: .4rem;
+}
+.is-invalid{
+  border-color: var(--danger) !important;
+}
+.invalid-feedback{
+  display: block;
+  font-size: .8rem;
+  color: var(--danger);
+  margin-top: .25rem;
 }
 
-.wrapper p {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #6c757d;
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 767px){
+  header.admin-topbar .brand-name{
+    display: none;
+  }
+  main.container,
+  main.container-fluid{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .icon-btn{
+    width: 40px;
+    height: 40px;
+  }
+  [data-tooltip]::after{
+    display: none;
+  }
+  .table-toolbar{
+    align-items: stretch;
+  }
+  .table-search{
+    max-width: none;
+  }
+  .link-chip{
+    max-width: none;
+  }
 }
 
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
+@media (max-width: 576px){
+  .wrapper{
+    padding: 1.75rem 1.25rem;
+  }
+  .table thead{
+    display: none;
+  }
+  .table tbody tr{
     display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: #495057;
-}
-
-.form-control {
-    width: 100%;
-    font-size: 16px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.form-control:focus {
-    border-color: #80bdff;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-
-.is-invalid {
-    border-color: #dc3545;
-}
-
-.invalid-feedback {
-    display: block;
-    width: 100%;
-    margin-top: 5px;
-    font-size: 14px;
-    color: #dc3545;
-}
-
-.btn-primary {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: 500;
-    color: #fff;
-    background-color: #007bff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    margin-bottom: .75rem;
+    padding: .5rem .75rem;
+  }
+  .table tbody td{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
     border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.15s ease-in-out;
+    padding: .4rem 0;
+    text-align: right;
+  }
+  .table tbody td::before{
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--ink-faint);
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    text-align: left;
+  }
+  /* Empty/error-state rows are a single spanning cell with no data-label —
+     exclude them from the label/value flip above, which otherwise shoves
+     their centered message flush to the right with an empty label spot. */
+  .table tbody td[colspan]{
+    display: block;
+    text-align: center;
+  }
+  .table tbody td[colspan]::before{
+    content: none;
+  }
 }
-
-.btn-primary:hover {
-    background-color: #0069d9;
-}
-
-.alert {
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-.alert-danger {
-    color: #721c24;
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
-}
-
-@media (max-width: 576px) {
-    .wrapper {
-        padding: 15px;
-    }
-    
-    .wrapper h2 {
-        font-size: 24px;
-    }
-} 

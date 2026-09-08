@@ -15,16 +15,40 @@ window.addEventListener("scroll", () => {
 // bar
 const mobileBar = document.getElementById("bar");
 const menu = document.querySelector(".mobile-menu");
+const menuBackdrop = document.querySelector(".mobile-menu-backdrop");
 
-mobileBar.addEventListener("click", function (e) {
-  menu.classList.toggle("barActive");
+function toggleMobileMenu(forceClose) {
+  const opening = forceClose ? false : !menu.classList.contains("barActive");
 
-  if (mobileBar.classList.contains("fa-bars")) {
-    mobileBar.classList.remove("fa-bars");
-    mobileBar.classList.add("fa-x");
-  } else {
-    mobileBar.classList.remove("fa-x");
-    mobileBar.classList.add("fa-bars");
+  menu.classList.toggle("barActive", opening);
+  if (menuBackdrop) menuBackdrop.classList.toggle("barActive", opening);
+  mobileBar.setAttribute("aria-expanded", String(opening));
+  mobileBar.setAttribute("aria-label", opening ? "Close menu" : "Open menu");
+  document.body.style.overflow = opening ? "hidden" : "";
+
+  mobileBar.classList.toggle("fa-bars", !opening);
+  mobileBar.classList.toggle("fa-x", opening);
+}
+
+mobileBar.addEventListener("click", () => toggleMobileMenu());
+mobileBar.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    toggleMobileMenu();
+  }
+});
+
+if (menuBackdrop) {
+  menuBackdrop.addEventListener("click", () => toggleMobileMenu(true));
+}
+
+menu.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => toggleMobileMenu(true));
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && menu.classList.contains("barActive")) {
+    toggleMobileMenu(true);
   }
 });
 

@@ -3,7 +3,7 @@
   $title = "Portfolio | D'Leverage Photography";
   require_once 'includes/header.php';
 ?>
-    <div style="margin-top: 200px"></div>
+    <div class="page-spacer"></div>
     <main>
       <div class="gallery">
         <ul class="controls">          
@@ -27,7 +27,7 @@
             while($data = $result->fetch_assoc()):
           ?>
             <a href="./image/<?php echo $data['filename']; ?>" class="image <?php echo $data['category']; ?> img">
-              <img src="./image/<?php echo $data['filename']; ?>" alt="<?php echo $data['filename']; ?>">
+              <img src="./image/<?php echo $data['filename']; ?>" alt="<?php echo $data['filename']; ?>" loading="lazy" decoding="async">
             </a>
           <?php
             endwhile;

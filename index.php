@@ -2,10 +2,9 @@
     $title = "D'Leverage Photography";
     require_once 'includes/header.php';
 ?>
-<div class="banner-parent"  data-aos="fade-zoom-in">
-    <div class="banner">
-        
-    </div>
+<div class="hero" data-aos="fade-zoom-in">
+    <div class="banner"></div>
+    <div class="hero__scroll-cue" aria-hidden="true"><span></span></div>
 </div>
 <main>
     <article>
@@ -20,7 +19,7 @@
     data-aos-easing="ease-in-sine">
         <div class="flex-50">
             <div class="img-holder img">
-            <img src="image/static-img/img1.JPG"  alt="Model1">
+            <img src="image/static-img/img1.JPG" alt="Portrait session by Dleverage Photography" loading="lazy" decoding="async">
             </div>
             <div class="text-holder">
                 <h2 class="mb-4">Welcome to Dleverage Photography</h2>

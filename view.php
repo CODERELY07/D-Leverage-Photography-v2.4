@@ -1,6 +1,7 @@
 <?php
 
 require_once 'connection.php';
+require_once 'includes/functions.php';
 
 $album_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
@@ -13,31 +14,37 @@ $stmt = $db->prepare("SELECT * FROM album WHERE id = ?");
 $stmt->bind_param("i", $album_id);
 $stmt->execute();
 $album = $stmt->get_result()->fetch_assoc();
+
+if (!$album) {
+    die("Album not found.");
+}
+
+$title = htmlspecialchars($album['album_name']) . " | Admin";
+require_once 'includes/admin-head.php';
+require_once 'includes/admin-header.php';
 ?>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
     .image-card {
         position: relative;
         overflow: hidden;
     }
-    .delete-btn {
+    .image-card .icon-btn{
         position: absolute;
-        top: 8px;
-        right: 8px;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        color: white;
-        cursor: pointer;
-        display: none;
-    }
-    .image-card:hover .delete-btn {
-        display: block;
+        top: 10px;
+        right: 10px;
     }
 </style>
 
-<div class="container mt-5">
-    <h2 class="text-center mb-4"><?= htmlspecialchars($album['album_name']) ?> Images</h2>
+<main class="container py-5">
+    <div class="page-heading">
+        <div>
+            <a href="albumImages.php" class="text-muted text-decoration-none d-inline-flex align-items-center gap-2 mb-2">
+                <i class="fas fa-arrow-left"></i> Back to Albums
+            </a>
+            <span class="eyebrow">Album</span>
+            <h1 class="h3 mb-0"><?= htmlspecialchars($album['album_name']) ?></h1>
+        </div>
+    </div>
 
     <div class="row">
         <?php
@@ -49,16 +56,15 @@ $album = $stmt->get_result()->fetch_assoc();
         if ($images->num_rows > 0):
             while ($img = $images->fetch_assoc()):
         ?>
-        <div class="col-md-3 mb-4">
-            <div class="card image-card">
-                <img src="<?= htmlspecialchars($img['img']) ?>" class="card-img-top" alt="Album Image">
+        <div class="col-6 col-md-3 mb-4">
+            <div class="card image-card shadow-sm">
+                <img src="<?= htmlspecialchars(url_encode_path($img['img'])) ?>" class="card-img-top" alt="Album Image" loading="lazy" decoding="async">
 
-                <!-- Delete Icon (uses a form) -->
-                <form action="delete_album_image.php" method="POST">
-                    <input type="hidden" name="image_id" value="<?= $img['id'] ?>">
-                    <input type="hidden" name="image_path" value="<?= $img['img'] ?>">
-                    <button type="submit" class="btn btn-danger delete-btn" title="Delete Image">
-                        &times;
+                <form action="delete_album_image.php" method="POST" class="delete-form">
+                    <input type="hidden" name="image_id" value="<?= (int) $img['id'] ?>">
+                    <input type="hidden" name="image_path" value="<?= htmlspecialchars($img['img']) ?>">
+                    <button type="submit" class="icon-btn icon-danger" data-tooltip="Delete" aria-label="Delete image">
+                        <i class="fas fa-trash"></i>
                     </button>
                 </form>
             </div>
@@ -71,6 +77,6 @@ $album = $stmt->get_result()->fetch_assoc();
         ?>
     </div>
 
-</div>
+</main>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once 'includes/admin-footer.php'; ?>
