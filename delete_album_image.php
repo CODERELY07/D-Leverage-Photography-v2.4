@@ -1,5 +1,11 @@
 <?php
+session_start();
 require_once 'connection.php';
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header('Location: index.php');
+    exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $image_id = intval($_POST['image_id']);

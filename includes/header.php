@@ -5,16 +5,31 @@
       header('Location: admin.php');
       exit();
     }
+    $current_page = basename($_SERVER['SCRIPT_NAME']);
+    $is_active = function (...$pages) use ($current_page) {
+        return in_array($current_page, $pages, true) ? 'is-active' : '';
+    };
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Dleverage Photography &mdash; Montreal-based wedding, portrait &amp; event photographer, available worldwide." />
+    <meta name="theme-color" content="#faf9f5" />
     <title><?= $title?></title>
     <link rel="icon" type="image/x-icon" href="image/static-img/logo2.png">
-    <base href="<?php echo rtrim((isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']), '/') . '/'; ?>">
-    <!-- Aos -->    
+    <?php
+        // dirname() returns "\" (not "/") for a root-level script on Windows,
+        // which rtrim(..., '/') doesn't strip. Browsers then treat that stray
+        // backslash as another path separator, doubling the slash after the
+        // host (http://host\/ -> http://host//). Normalize to "/" first.
+        $baseDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']));
+        $baseHref = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . rtrim($baseDir, '/') . '/';
+    ?>
+    <base href="<?php echo $baseHref; ?>">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Aos -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <!-- Bootstrap -->
     <link
@@ -38,21 +53,23 @@
     <!-- <script defer src="js/script.js?<?php echo time()?>"></script> -->
   </head>
   <body class="grey">
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="mobile-header fix">
       <div>
-        <i class="fa-solid fa-bars" id="bar"></i>
+        <i class="fa-solid fa-bars" id="bar" role="button" tabindex="0" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"></i>
         <div class="logo">
           <a href="index.php"
-            ><img src="image/static-img/logo.png" alt="D'Leverage Logo"
+            ><img src="image/static-img/logo-trim.png" alt="D'Leverage Logo"
             /></a>
         </div>
         <div></div>
       </div>
-      <ul class="mobile-menu">
-        <li><a href="portfolio.php">Portfolio</a></li>
-        <li><a href="about.php">About</a></li>
+      <div class="mobile-menu-backdrop"></div>
+      <ul class="mobile-menu" id="mobileMenu">
+        <li><a href="portfolio.php" class="<?= $is_active('portfolio.php') ?>">Portfolio</a></li>
+        <li><a href="about.php" class="<?= $is_active('about.php') ?>">About</a></li>
         <li class="mobile-nav-photo">
-          <a href="photos.php">Photos</a>
+          <a href="photos.php" class="<?= $is_active('photos.php', 'photos-category.php', 'view-album.php') ?>">Photos</a>
         </li>
         <li class="bg-dark text-white px-5 py-1 rounded">
           <a href="contact.php">Book Now</a>
@@ -60,23 +77,22 @@
       </ul>
     </div>
     <header class="header fix">
-      <nav class="container-fluid" data-aos-duration="1200" data-aos="fade-down">
+      <nav class="container-fluid" data-aos-duration="1200" data-aos="fade-down" aria-label="Primary">
         <ul class="menu">
-          <li><a href="portfolio.php">Portfolio</a></li>
-          <li><a href="about.php">About</a></li>
+          <li><a href="portfolio.php" class="<?= $is_active('portfolio.php') ?>">Portfolio</a></li>
+          <li><a href="about.php" class="<?= $is_active('about.php') ?>">About</a></li>
           <li class="logo">
             <a href="index.php"
-              ><img src="image/static-img/logo.png" alt="D'Leverage Logo"
+              ><img src="image/static-img/logo-trim.png" alt="D'Leverage Logo"
             /></a>
           </li>
           <li class="photo">
-            <a href="photos.php">Photos</a>
+            <a href="photos.php" class="<?= $is_active('photos.php', 'photos-category.php', 'view-album.php') ?>">Photos</a>
           </li>
-          <a href="contact.php">
-            <li class="bg-dark text-white px-5 py-1 rounded">
-              Book Now
-            </li>
-          </a>
+          <li class="nav-cta bg-dark text-white px-5 py-1 rounded">
+            <a href="contact.php">Book Now</a>
+          </li>
         </ul>
       </nav>
     </header>
+    <div id="main-content"></div>

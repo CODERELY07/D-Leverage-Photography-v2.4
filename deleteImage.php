@@ -4,9 +4,12 @@ session_start();
 
 // Redirect if already logged in
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header('Location: index.php'); 
+    header('Location: index.php');
     exit();
 }
+// Nothing below reads or writes $_SESSION again — release the lock so this
+// request doesn't block other requests on the same session.
+session_write_close();
 
 if (isset($_POST['click_delete_btn']) && isset($_POST['img_id']) && isset($_POST['filename'])) {
     // Sanitize inputs

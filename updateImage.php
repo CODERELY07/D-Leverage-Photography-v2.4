@@ -1,5 +1,15 @@
 <?php
-require 'connection.php'; 
+session_start();
+require 'connection.php';
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    http_response_code(403);
+    exit('Unauthorized');
+}
+// Nothing below reads or writes $_SESSION again — release the lock so this
+// request (which moves a file) doesn't block other requests on the same
+// session, like the page's own polling/upload calls.
+session_write_close();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['new_image']) && isset($_POST['img_id'])) {
     $img_id = intval($_POST['img_id']);

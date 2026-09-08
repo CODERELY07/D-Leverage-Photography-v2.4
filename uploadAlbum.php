@@ -1,18 +1,23 @@
 <?php
 session_start();
 require_once 'connection.php';
+require_once 'includes/functions.php';
 
 function get_size($size) {
     return number_format($size / 1024, 2);
 }
 
-$albumName = htmlspecialchars($_POST['album-name']);
-$albumLink = htmlspecialchars($_POST['album-link']);
-$albumCategory = htmlspecialchars($_POST['album-category']);
+// Store raw values — every page that displays these already escapes them
+// with htmlspecialchars() at output time. Escaping here too caused values
+// with "&" (like "Ej & Dyessel") to come back out of the database as the
+// literal text "Ej &amp; Dyessel" once escaped a second time on display.
+$albumName = $_POST['album-name'];
+$albumLink = $_POST['album-link'];
+$albumCategory = $_POST['album-category'];
 $albumId = isset($_POST['album-id']) ? intval($_POST['album-id']) : 0;
 
 $uploadDir = 'image/upload-album/';
-$albumImg = $_FILES['upload-album']['name'];
+$albumImg = $_FILES['upload-album']['name'] ? sanitize_upload_filename($_FILES['upload-album']['name']) : '';
 $tempFile = $_FILES['upload-album']['tmp_name'];
 
 if ($albumId > 0) {

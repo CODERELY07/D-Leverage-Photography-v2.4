@@ -1,6 +1,16 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    http_response_code(403);
+    exit('Unauthorized');
+}
+// This endpoint only reads $_SESSION once, above — release the session lock
+// immediately instead of holding it for the whole request. Otherwise every
+// fetchImages() call (fired on load and after every filter/delete/edit on
+// upload-portfolio.php) queues up behind any other request using the same
+// session, including the upload form's own submission.
+session_write_close();
 
 require_once 'connection.php';
 

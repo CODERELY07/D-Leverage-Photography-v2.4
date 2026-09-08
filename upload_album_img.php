@@ -1,6 +1,16 @@
 <?php
-
+session_start();
 require_once 'connection.php';
+require_once 'includes/functions.php';
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    http_response_code(403);
+    exit('Unauthorized');
+}
+// Nothing below reads or writes $_SESSION again — release the lock so this
+// request (which moves a file) doesn't block other requests on the same
+// session.
+session_write_close();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['img'])) {
     $album_id = intval($_POST['album_id']);
@@ -8,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['img'])) {
 
     // Basic validation
     if ($img['error'] === 0) {
-        $imgName = basename($img['name']);
+        $imgName = sanitize_upload_filename($img['name']);
         $targetDir = "image/uploads/";
         $targetFile = $targetDir . time() . "_" . $imgName;
 
