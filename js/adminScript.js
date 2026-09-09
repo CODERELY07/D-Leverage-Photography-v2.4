@@ -1,8 +1,6 @@
-// Account dropdown (present on every admin page via includes/admin-header.php)
 const user = document.getElementById('user');
 const dropdown = document.getElementById('adminDropdown');
 
-// Filter dropdown (upload-portfolio.php only)
 const filtered = document.getElementById('filtered');
 const filterHide = document.getElementById('filter-hide');
 
@@ -18,7 +16,6 @@ function toggleElem(element) {
     if (element === dropdown && user) user.setAttribute('aria-expanded', String(opening));
 }
 
-// Close any open dropdown when clicking elsewhere on the page
 window.addEventListener("click", () => {
     hideElem(filterHide);
     hideElem(dropdown);
@@ -38,7 +35,6 @@ if (filtered) {
     });
 }
 
-// Album Image Scripts (albumImages.php)
 document.addEventListener("DOMContentLoaded", () => {
     const albumModalEl = document.getElementById('albumModal');
     const albumForm = document.getElementById('albumForm');
@@ -57,8 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll('#albumTableBody tr.row-editing').forEach(tr => tr.classList.remove('row-editing'));
     }
 
-    // Clicking a row's Edit button opens #albumModal (via its own data-bs-toggle)
-    // and this fills it in for that album.
     function enterEditMode(button) {
         document.getElementById('album-id').value = button.dataset.id;
         document.getElementById('upload-name').value = button.dataset.name;
@@ -99,23 +93,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (albumModalEl) {
-        // Whatever closed it — the X, the backdrop, Escape, or a successful
-        // submit reloading the page — land back in "create" mode next time.
         albumModalEl.addEventListener('hidden.bs.modal', resetAlbumForm);
     }
 
     if (albumForm) {
-        // Prevent an accidental double-submit while the page navigates away.
-        // Deferred via setTimeout — disabling a submit button synchronously in
-        // its own 'submit' handler drops it from the request the browser
-        // actually sends (see the identical fix in upload-portfolio.php).
         albumForm.addEventListener('submit', () => {
             const btn = document.getElementById('albumSubmitBtn');
             setTimeout(() => { if (btn) btn.disabled = true; }, 0);
         });
     }
 
-    // Quick client-side search over the albums table
     const albumSearch = document.getElementById('albumSearch');
     const albumTableBody = document.getElementById('albumTableBody');
     const noAlbumResults = document.getElementById('noAlbumResults');
@@ -132,7 +119,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Add Images to Existing Album (AJAX)
     const addImageModalEl = document.getElementById('addImageModal');
     const addToAlbumForm = document.getElementById('addToAlbumForm');
     if (addToAlbumForm) {
@@ -151,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             $.ajax({
-                url: 'upload_album_img.php',
+                url: 'actions/upload_album_img.php',
                 type: 'POST',
                 data: formData,
                 cache: false,
@@ -179,7 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (addImageModalEl) {
-            // Clear any leftover success/error message and inputs for next time it's opened
             addImageModalEl.addEventListener('hidden.bs.modal', () => {
                 addToAlbumForm.reset();
                 if (responseBox) responseBox.innerHTML = '';

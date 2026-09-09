@@ -1,6 +1,7 @@
 <?php
-require_once 'connection.php';
+require_once __DIR__ . '/config/connection.php';
 require_once 'includes/functions.php';
+require_once __DIR__ . '/includes/db/albums.php';
 
 $album_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
@@ -8,20 +9,12 @@ if ($album_id <= 0) {
     die("Invalid album ID.");
 }
 
-// Fetch album details
-$album_stmt = $db->prepare("SELECT * FROM album WHERE id = ?");
-$album_stmt->bind_param("i", $album_id);
-$album_stmt->execute();
-$album_result = $album_stmt->get_result();
+$album = get_album_by_id($db, $album_id);
 
-if ($album_result->num_rows == 0) {
+if (!$album) {
     die("Album not found.");
 }
 
-$album = $album_result->fetch_assoc();
-// Needed before including the header, which prints it into <title> —
-// previously header.php was required first thing, before $album (or $title)
-// existed, which threw "Undefined variable $title" into the page title.
 $title = htmlspecialchars($album['album_name']) . " | D'Leverage Photography";
 
 require_once 'includes/header.php';
@@ -41,14 +34,10 @@ require_once 'includes/header.php';
         <div class="album-container mt-5">
             <div class="row">
                 <?php
-                // Fetch album images
-                $img_stmt = $db->prepare("SELECT * FROM album_img WHERE album_id = ?");
-                $img_stmt->bind_param("i", $album_id);
-                $img_stmt->execute();
-                $img_result = $img_stmt->get_result();
+                $images = get_album_images($db, $album_id);
 
-                if ($img_result->num_rows > 0):
-                    while ($img = $img_result->fetch_assoc()):
+                if (!empty($images)):
+                    foreach ($images as $img):
                 ?>
                         <div class="col-md-4 mb-4">
                             <div class="card shadow-sm">
@@ -56,7 +45,7 @@ require_once 'includes/header.php';
                             </div>
                         </div>
                 <?php
-                    endwhile;
+                    endforeach;
                 else:
                     echo "<p class='text-muted text-center'>No images found for this album.</p>";
                 endif;

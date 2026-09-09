@@ -1,8 +1,4 @@
-/* ============================================================
-   D'Leverage Admin — design system
-   Shares the public site's ink/gold palette so the admin feels
-   like part of the same product, not a stock Bootstrap theme.
-   ============================================================ */
+
 :root{
   --ink: #17170f;
   --ink-soft: #5a5a4f;
@@ -33,9 +29,6 @@
   --logo-h: 34px;
 }
 
-/* ============================================================
-   RESET / BASE
-   ============================================================ */
 *{
   padding: 0;
   margin: 0;
@@ -93,9 +86,6 @@ img{
   color: var(--ink-faint) !important;
 }
 
-/* ============================================================
-   TOPBAR
-   ============================================================ */
 header.admin-topbar{
   background-color: var(--surface);
   border-bottom: 1px solid var(--line);
@@ -117,7 +107,6 @@ header.admin-topbar{
   color: var(--ink);
 }
 
-/* user avatar + dropdown */
 .user-icon-con{
   position: relative;
 }
@@ -186,9 +175,6 @@ header.admin-topbar{
   margin: .35rem .2rem;
 }
 
-/* ============================================================
-   BUTTONS
-   ============================================================ */
 .btn{
   border-radius: 999px;
   font-weight: 500;
@@ -210,7 +196,7 @@ header.admin-topbar{
   box-shadow: var(--shadow-md);
 }
 .btn-gold{
-  /* Both gradient stops stay dark enough for white text to clear WCAG AA (4.5:1) */
+
   background: linear-gradient(180deg, var(--gold-dark), var(--gold-deep));
   border-color: var(--gold-dark);
   color: #fff;
@@ -247,7 +233,6 @@ header.admin-topbar{
   box-shadow: var(--shadow-md);
 }
 
-/* Icon-only action buttons (table rows, cards) */
 .icon-btn{
   --icon-btn-color: var(--ink-soft);
   --icon-btn-bg: var(--surface);
@@ -287,7 +272,6 @@ header.admin-topbar{
   gap: .4rem;
 }
 
-/* Lightweight CSS tooltip for icon buttons: <button data-tooltip="Delete"> */
 [data-tooltip]{
   position: relative;
 }
@@ -316,9 +300,6 @@ header.admin-topbar{
   transform: translateX(-50%) translateY(0);
 }
 
-/* ============================================================
-   CARDS
-   ============================================================ */
 .card{
   border-radius: var(--radius-md);
   border: 1px solid var(--line);
@@ -327,7 +308,7 @@ header.admin-topbar{
 .card.shadow-sm{
   box-shadow: var(--shadow-sm) !important;
 }
-/* The whole dashboard box is the click target; the card inside is purely visual */
+
 .admin-box-link{
   display: block;
   height: 100%;
@@ -350,7 +331,7 @@ header.admin-topbar{
   box-shadow: var(--shadow-sm) !important;
   transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
 }
-/* Read by both the icon badge and (on hover) the card border */
+
 .admin-box:has(.stat-icon.gold){ --card-accent: var(--gold); }
 .admin-box:has(.stat-icon.success){ --card-accent: var(--success); }
 .admin-box:has(.stat-icon.warning){ --card-accent: #c99a2e; }
@@ -359,7 +340,7 @@ header.admin-topbar{
   border-color: var(--card-accent, var(--line));
   box-shadow: var(--shadow-md) !important;
 }
-/* Bento-tile layout: small icon badge, label block, then a big number — all left-aligned */
+
 .admin-box .card-body{
   display: flex;
   flex-direction: column;
@@ -399,9 +380,6 @@ header.admin-topbar{
   margin: .5rem 0 0;
 }
 
-/* ============================================================
-   FORMS
-   ============================================================ */
 .form-control,
 select.form-control{
   border-color: var(--line);
@@ -419,7 +397,7 @@ label{
   color: var(--ink-soft);
   font-size: .88rem;
 }
-/* Bootstrap 4 form helpers kept for markup compatibility (BS5 dropped them) */
+
 .form-row{
   display: flex;
   flex-wrap: wrap;
@@ -434,7 +412,6 @@ label{
   margin-bottom: 1rem;
 }
 
-/* Filter dropdown (upload-portfolio.php) */
 .btn-filter{
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
@@ -449,10 +426,7 @@ label{
   border-color: var(--gold);
   color: var(--gold-dark);
 }
-/* Anchor the dropdown to its trigger, same pattern as .admin-dropdown above,
-   instead of relying on document-flow position (which let it overflow the
-   viewport and force a horizontal scrollbar whenever the button sat near
-   the right edge of the page). */
+
 .hidden-parent.filter{
   position: relative;
 }
@@ -488,9 +462,6 @@ label{
   font-weight: 600;
 }
 
-/* ============================================================
-   SECTION HEADERS (icon chip + title, used atop cards/forms)
-   ============================================================ */
 .icon-chip{
   width: 42px;
   height: 42px;
@@ -516,7 +487,6 @@ label{
   margin-top: .1rem;
 }
 
-/* Primary page actions: icon-only, label revealed on hover/focus via [data-tooltip] */
 .album-actions{
   display: flex;
   gap: .6rem;
@@ -552,19 +522,12 @@ label{
   background: linear-gradient(180deg, var(--info), #204a68);
 }
 
-/* ============================================================
-   TABLES
-   ============================================================ */
-/* Bleed distance matches Bootstrap's actual --bs-card-spacer-*: 1rem, not
-   1.25rem — the old mismatch overshot the card's edge by 4px per side,
-   so the table visually poked outside the card's rounded border. */
 .card > .card-body > .table-responsive,
 .card > .table-responsive{
   margin: 0 -1rem -1rem;
   width: calc(100% + 2rem);
 }
-/* Only bleed into the top edge too when the table is the card's first
-   element — otherwise it collides with a title/toolbar sitting above it */
+
 .card > .card-body > .table-responsive:first-child,
 .card > .table-responsive:first-child{
   margin-top: -1rem;
@@ -609,12 +572,11 @@ label{
   width: 64px;
   cursor: pointer;
 }
-/* Row currently loaded into an edit form above the table */
+
 tr.row-editing td{
   background: var(--gold-soft) !important;
 }
 
-/* Table card header: title + count on the left, search on the right */
 .table-toolbar{
   display: flex;
   flex-wrap: wrap;
@@ -641,7 +603,6 @@ tr.row-editing td{
   padding-left: 2.25rem;
 }
 
-/* Category pill shown under an album's name */
 .category-badge{
   display: inline-flex;
   align-items: center;
@@ -657,7 +618,6 @@ tr.row-editing td{
 .category-badge.birthday{ background: var(--success-soft); color: var(--success); }
 .category-badge.others{ background: var(--surface-alt); color: var(--ink-soft); }
 
-/* Compact external-link pill (replaces raw, layout-breaking URLs in tables) */
 .link-chip{
   display: inline-flex;
   align-items: center;
@@ -685,21 +645,14 @@ tr.row-editing td{
   color: var(--gold-dark);
 }
 
-/* ============================================================
-   BADGES
-   ============================================================ */
 .badge{
   font-weight: 600;
 }
 .badge.bg-danger{ background-color: var(--danger) !important; }
-/* ink-faint and gold aren't dark enough for white badge text (WCAG AA);
-   dark ink text clears 4.5:1 on both, danger stays white since it already does */
+
 .badge.bg-secondary{ background-color: var(--ink-faint) !important; color: var(--ink) !important; }
 .badge.bg-primary{ background-color: var(--gold) !important; color: var(--ink) !important; }
 
-/* ============================================================
-   MESSAGES / INBOX
-   ============================================================ */
 .messageNotif-container a{
   display: inline-flex;
   align-items: center;
@@ -712,9 +665,6 @@ tr.row-editing td{
   color: var(--gold-dark);
 }
 
-/* ============================================================
-   LOGIN
-   ============================================================ */
 .bg-main{
   background: linear-gradient(180deg, var(--paper) 0%, var(--surface-alt) 100%);
   min-height: 100vh;
@@ -802,9 +752,6 @@ tr.row-editing td{
   margin-top: .25rem;
 }
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
 @media (max-width: 767px){
   header.admin-topbar .brand-name{
     display: none;
@@ -864,9 +811,7 @@ tr.row-editing td{
     letter-spacing: .04em;
     text-align: left;
   }
-  /* Empty/error-state rows are a single spanning cell with no data-label —
-     exclude them from the label/value flip above, which otherwise shoves
-     their centered message flush to the right with an empty label spot. */
+
   .table tbody td[colspan]{
     display: block;
     text-align: center;

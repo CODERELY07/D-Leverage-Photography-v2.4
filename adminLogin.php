@@ -1,10 +1,9 @@
 <?php
-    require_once 'connection.php'; 
+    require_once __DIR__ . '/config/connection.php';
     session_start();
 
-    // Redirect if already logged in
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-        header('Location: admin.php');
+        header('Location: admin/dashboard.php');
         exit();
     }
 

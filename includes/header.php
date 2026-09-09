@@ -1,8 +1,8 @@
 <?php
      session_start();
-     // Check if the user is logged in
+
      if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-      header('Location: admin.php');
+      header('Location: admin/dashboard.php');
       exit();
     }
     $current_page = basename($_SERVER['SCRIPT_NAME']);
@@ -20,25 +20,24 @@
     <title><?= $title?></title>
     <link rel="icon" type="image/x-icon" href="image/static-img/logo2.png">
     <?php
-        // dirname() returns "\" (not "/") for a root-level script on Windows,
-        // which rtrim(..., '/') doesn't strip. Browsers then treat that stray
-        // backslash as another path separator, doubling the slash after the
-        // host (http://host\/ -> http://host//). Normalize to "/" first.
+
         $baseDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']));
-        $baseHref = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . rtrim($baseDir, '/') . '/';
+        $isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+            || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https');
+        $baseHref = ($isHttps ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . rtrim($baseDir, '/') . '/';
     ?>
     <base href="<?php echo $baseHref; ?>">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Aos -->
+
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <!-- Bootstrap -->
+
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <!-- Magnific pop up css-->
+
     <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.2.0/magnific-popup.min.css"
@@ -47,10 +46,9 @@
     referrerpolicy="no-referrer"
   />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Sweetalert -->
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="css/style.css?v=<?php echo time(); ?>"/>
-    <!-- <script defer src="js/script.js?<?php echo time()?>"></script> -->
   </head>
   <body class="grey">
     <a class="skip-link" href="#main-content">Skip to content</a>

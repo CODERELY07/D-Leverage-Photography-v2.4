@@ -12,7 +12,6 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// bar
 const mobileBar = document.getElementById("bar");
 const menu = document.querySelector(".mobile-menu");
 const menuBackdrop = document.querySelector(".mobile-menu-backdrop");
@@ -67,24 +66,15 @@ loading.forEach((div) => {
   }
 });
 
-// Contact XMLhttpRequest
-
 const contactForm = document.getElementById("contactForm");
 
-if(location.pathname == "/D-Leverage-Photography-v2.4/contact.php"){
+if (contactForm) {
     contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
     let formData = new FormData(this);
-    /*Testing purpose */
-    // let formObject = {};
-    // formData.forEach((key,value)=>{
-    //    formObject[key] = value;
-    // })
-
-    // console.log(formObject);
     formData.append("send", document.getElementById("send").name);
     let xhr = new XMLHttpRequest();
-    xhr.open("Post", "contactSubmit.php");
+    xhr.open("Post", "actions/contactSubmit.php");
 
     xhr.onload = function () {
       if (xhr.status >= 200 && xhr.status < 300) {
@@ -123,7 +113,5 @@ if(location.pathname == "/D-Leverage-Photography-v2.4/contact.php"){
 
     xhr.send(formData);
   });
- 
+
 }
-
-

@@ -1,11 +1,9 @@
 <?php
-   require_once 'connection.php';
+   require_once __DIR__ . '/config/connection.php';
    require_once 'includes/functions.php';
 
-    // Get category from URL, default to 'others' if not set
     $category = isset($_GET['category']) ? strtolower($_GET['category']) : 'others';
 
-    // Sanitize allowed values
     $allowed_categories = ['wedding', 'birthday', 'others'];
     if (!in_array($category, $allowed_categories)) {
         die("Invalid category selected.");

@@ -19,7 +19,7 @@
         </article>
         <article>
             <h5 class="mb-4">Expanding Our Vision: Join Our Team</h5>
-            
+
             <p class="text-center">
                 As we continue to grow and touch lives with our artistry, we are excited to announce our plans to expand and create a dedicated team of passionate photographers and creatives. Our vision is to foster a collaborative environment where talent and innovation come together to produce extraordinary work. We seek individuals who share our commitment to capturing the beauty and love inherent in every moment and are eager to contribute to our mission with their unique perspectives and skills.
                 <br><br>
